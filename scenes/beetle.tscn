@@ -1,29 +1,125 @@
-[gd_scene load_steps=5 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=17 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Texture2D" uid="uid://c62ixu325h8vi" path="res://assets/art/Dung Beetle-Sheet.png" id="1_64ueh"]
+[ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdaub"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll0md"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfg8r"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(96, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5e0x"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(128, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd4e3"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(32, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60t3p"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(64, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6rwp"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4f6wc"]
 atlas = ExtResource("1_64ueh")
 region = Rect2(32, 0, 32, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_202u7"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtcxo"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjk8q"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(96, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l7pq"]
+atlas = ExtResource("1_64ueh")
+region = Rect2(128, 16, 32, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_l4t8v"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4f6wc")
+"texture": SubResource("AtlasTexture_pdaub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll0md")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfg8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5e0x")
 }],
 "loop": true,
-"name": &"default",
+"name": &"dung",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd4e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60t3p")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6rwp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4f6wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_202u7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtcxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjk8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l7pq")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6awh0"]
 size = Vector2(11, 6)
 
 [node name="Beetle" type="CharacterBody2D"]
+script = ExtResource("1_ycl0j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

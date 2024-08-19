@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cupsl6j6up5m3"]
+
+[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="1_ethko"]
+[ext_resource type="Texture2D" uid="uid://dsf21ho3gkcmo" path="res://assets/tilemaps/Tilemap.png" id="2_hxjyk"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tutff"]
+texture = ExtResource("2_hxjyk")
+texture_region_size = Vector2i(8, 8)
+2:0/0 = 0
+1:0/0 = 0
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+0:4/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gu115"]
+sources/0 = SubResource("TileSetAtlasSource_tutff")
+
+[node name="Test" type="Node2D"]
+
+[node name="Beetle" parent="." instance=ExtResource("1_ethko")]
+position = Vector2(303, 504)
+scale = Vector2(10, 10)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(10, 10)
+tile_set = SubResource("TileSet_gu115")
