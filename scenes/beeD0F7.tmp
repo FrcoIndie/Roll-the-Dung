@@ -1,41 +1,26 @@
-[gd_scene load_steps=32 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=26 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
-[ext_resource type="Texture2D" uid="uid://danwlo4nyu3rg" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i8i17"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2m28h"]
-atlas = SubResource("CompressedTexture2D_i8i17")
-region = Rect2(32, 80, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pk1j5"]
-atlas = SubResource("CompressedTexture2D_i8i17")
-region = Rect2(64, 80, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0k2y"]
-atlas = SubResource("CompressedTexture2D_i8i17")
-region = Rect2(96, 80, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eercq"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(32, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6s46"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(64, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2lqxo"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(96, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gnqe3"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(128, 32, 32, 16)
+[ext_resource type="Texture2D" uid="uid://da3d7vot7n3fn" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mdlte"]
 load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trmx5"]
+atlas = SubResource("CompressedTexture2D_mdlte")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tlio"]
+atlas = SubResource("CompressedTexture2D_mdlte")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceuuw"]
+atlas = SubResource("CompressedTexture2D_mdlte")
+region = Rect2(96, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwjr8"]
+atlas = SubResource("CompressedTexture2D_mdlte")
+region = Rect2(128, 32, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rrm5d"]
 atlas = SubResource("CompressedTexture2D_mdlte")
@@ -53,42 +38,36 @@ region = Rect2(96, 48, 32, 16)
 atlas = SubResource("CompressedTexture2D_mdlte")
 region = Rect2(128, 48, 32, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iccxm"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1d1j8"]
-atlas = SubResource("CompressedTexture2D_iccxm")
+atlas = ExtResource("2_6u6jl")
 region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ietba"]
-atlas = SubResource("CompressedTexture2D_iccxm")
+atlas = ExtResource("2_6u6jl")
 region = Rect2(64, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6l1yh"]
-atlas = SubResource("CompressedTexture2D_iccxm")
+atlas = ExtResource("2_6u6jl")
 region = Rect2(96, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3srwr"]
-atlas = SubResource("CompressedTexture2D_iccxm")
+atlas = ExtResource("2_6u6jl")
 region = Rect2(128, 0, 32, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wxy43"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_02afq"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj437"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(32, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tgble"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="AtlasTexture" id="AtlasTexture_38cu0"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(64, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ctyxs"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="AtlasTexture" id="AtlasTexture_brqrl"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(96, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3du3b"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf3ct"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(128, 64, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2krpg"]
@@ -111,30 +90,16 @@ region = Rect2(128, 16, 32, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2m28h")
+"texture": SubResource("AtlasTexture_trmx5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pk1j5")
+"texture": SubResource("AtlasTexture_8tlio")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j0k2y")
-}],
-"loop": false,
-"name": &"down",
-"speed": 6.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eercq")
+"texture": SubResource("AtlasTexture_ceuuw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i6s46")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2lqxo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gnqe3")
+"texture": SubResource("AtlasTexture_xwjr8")
 }],
 "loop": true,
 "name": &"dung",
@@ -176,18 +141,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_02afq")
+"texture": SubResource("AtlasTexture_qj437")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tgble")
+"texture": SubResource("AtlasTexture_38cu0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ctyxs")
+"texture": SubResource("AtlasTexture_brqrl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3du3b")
+"texture": SubResource("AtlasTexture_qf3ct")
 }],
-"loop": false,
+"loop": true,
 "name": &"turn",
 "speed": 6.0
 }, {
@@ -209,26 +174,23 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nunp4"]
-radius = 4.0
-height = 10.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6awh0"]
+size = Vector2(11, 6)
 
 [node name="Beetle" type="CharacterBody2D"]
-z_index = 3
-collision_layer = 2
-collision_mask = 7
-floor_max_angle = 0.872665
 script = ExtResource("1_ycl0j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")
-animation = &"down"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_nunp4")
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_6awh0")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(8, 4, -7, 4, 0, -1)
-disabled = true
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

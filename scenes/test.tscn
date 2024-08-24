@@ -1,37 +1,72 @@
-[gd_scene load_steps=5 format=3 uid="uid://cupsl6j6up5m3"]
+[gd_scene load_steps=7 format=4 uid="uid://cupsl6j6up5m3"]
 
 [ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="1_ethko"]
+[ext_resource type="Script" path="res://scripts/test.gd" id="1_s8sya"]
 [ext_resource type="Texture2D" uid="uid://dsf21ho3gkcmo" path="res://assets/tilemaps/Tilemap.png" id="2_hxjyk"]
+[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung.tscn" id="4_ucnpi"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tutff"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mi1w2"]
+resource_name = "terrain"
 texture = ExtResource("2_hxjyk")
 texture_region_size = Vector2i(8, 8)
-2:0/0 = 0
-1:0/0 = 0
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 1:1/0 = 0
-2:1/0 = 0
-2:2/0 = 0
-1:2/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -4, 4, 4, -4, 4)
 0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 0, 4, 4, -4, 4)
 1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, 0, 4, -4, 4, 4, -4, 4)
 0:8/0 = 0
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 2, 4, 4, -4, 4)
 1:8/0 = 0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, 2, 4, 0, 4, 4, -4, 4)
 2:8/0 = 0
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, 0, 4, -2, 4, 4, -4, 4)
 3:8/0 = 0
+3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -2, 4, -4, 4, 4, -4, 4)
 
-[sub_resource type="TileSet" id="TileSet_gu115"]
-sources/0 = SubResource("TileSetAtlasSource_tutff")
+[sub_resource type="TileSet" id="TileSet_f6vtx"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 7
+sources/0 = SubResource("TileSetAtlasSource_mi1w2")
 
 [node name="Test" type="Node2D"]
+script = ExtResource("1_s8sya")
 
-[node name="Beetle" parent="." instance=ExtResource("1_ethko")]
-position = Vector2(303, 504)
+[node name="Beetle" parent="." node_paths=PackedStringArray("dung_body") instance=ExtResource("1_ethko")]
+z_index = 1
+position = Vector2(1455, 555)
 scale = Vector2(10, 10)
+dung_body = NodePath("../Dung")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(10, 10)
-tile_set = SubResource("TileSet_gu115")
+tile_map_data = PackedByteArray("AAAEAAgAAAABAAAAAAAFAAgAAAABAAAAAAAGAAgAAAABAAAAAAANAAgAAAABAAAAAAATAAgAAAABAAAAAAAWAAkAAAABAAEAAAAVAAkAAAABAAEAAAAUAAkAAAABAAEAAAATAAkAAAABAAEAAAASAAkAAAABAAEAAAARAAkAAAABAAEAAAAQAAkAAAABAAEAAAAPAAkAAAABAAEAAAAOAAkAAAABAAEAAAANAAkAAAABAAEAAAAGAAkAAAABAAEAAAAFAAkAAAABAAEAAAAEAAkAAAABAAEAAAAHAAgAAAABAAAAAAAIAAgAAAABAAAAAAAHAAkAAAABAAEAAAAIAAkAAAABAAEAAAAJAAkAAAABAAEAAAAKAAkAAAABAAEAAAALAAkAAAABAAEAAAAMAAkAAAABAAEAAAAMAAgAAAABAAAAAAALAAgAAAABAAAAAAAJAAgAAAABAAAAAAAKAAgAAAABAAAAAAAOAAgAAAABAAAAAAAPAAgAAAABAAAAAAAQAAgAAAABAAAAAAARAAgAAAABAAAAAAASAAgAAAABAAAAAAAEAAoAAAABAAEAAAAEAAsAAAABAAEAAAAEAAwAAAABAAEAAAAEAA0AAAABAAEAAAAFAAoAAAABAAEAAAAFAAsAAAABAAEAAAAFAAwAAAABAAEAAAAFAA0AAAABAAEAAAAGAAoAAAABAAEAAAAGAAsAAAABAAEAAAAGAAwAAAABAAEAAAAGAA0AAAABAAEAAAAHAAoAAAABAAEAAAAHAAsAAAABAAEAAAAHAAwAAAABAAEAAAAHAA0AAAABAAEAAAAIAAoAAAABAAEAAAAIAAsAAAABAAEAAAAIAAwAAAABAAEAAAAIAA0AAAABAAEAAAAJAAoAAAABAAEAAAAJAAsAAAABAAEAAAAJAAwAAAABAAEAAAAJAA0AAAABAAEAAAAKAAoAAAABAAEAAAAKAAsAAAABAAEAAAAKAAwAAAABAAEAAAAKAA0AAAABAAEAAAALAAoAAAABAAEAAAALAAsAAAABAAEAAAALAAwAAAABAAEAAAALAA0AAAABAAEAAAAMAAoAAAABAAEAAAAMAAsAAAABAAEAAAAMAAwAAAABAAEAAAAMAA0AAAABAAEAAAANAAoAAAABAAEAAAANAAsAAAABAAEAAAANAAwAAAABAAEAAAANAA0AAAABAAEAAAAOAAoAAAABAAEAAAAOAAsAAAABAAEAAAAOAAwAAAABAAEAAAAOAA0AAAABAAEAAAAPAAoAAAABAAEAAAAPAAsAAAABAAEAAAAPAAwAAAABAAEAAAAPAA0AAAABAAEAAAAQAAoAAAABAAEAAAAQAAsAAAABAAEAAAAQAAwAAAABAAEAAAAQAA0AAAABAAEAAAARAAoAAAABAAEAAAARAAsAAAABAAEAAAARAAwAAAABAAEAAAARAA0AAAABAAEAAAASAAoAAAABAAEAAAASAAsAAAABAAEAAAASAAwAAAABAAEAAAASAA0AAAABAAEAAAATAAoAAAABAAEAAAATAAsAAAABAAEAAAATAAwAAAABAAEAAAATAA0AAAABAAEAAAAUAAoAAAABAAEAAAAUAAsAAAABAAEAAAAUAAwAAAABAAEAAAAUAA0AAAABAAEAAAAVAAoAAAABAAEAAAAVAAsAAAABAAEAAAAVAAwAAAABAAEAAAAVAA0AAAABAAEAAAAWAAoAAAABAAEAAAAWAAsAAAABAAEAAAAWAAwAAAABAAEAAAAWAA0AAAABAAEAAAAXAAoAAAABAAEAAAAXAAsAAAABAAEAAAAXAAwAAAABAAEAAAAXAA0AAAABAAEAAAADAAgAAAAAAAAAAAADAAkAAAAAAAEAAAADAAoAAAAAAAEAAAADAAsAAAAAAAEAAAADAAwAAAAAAAEAAAADAA0AAAAAAAEAAAAUAAcAAAAAAAgAAAAVAAcAAAABAAgAAAAWAAcAAAACAAgAAAAXAAcAAAADAAgAAAAXAAgAAAABAAEAAAAXAAkAAAABAAEAAAAWAAgAAAABAAEAAAAVAAgAAAABAAEAAAAUAAgAAAABAAEAAAAYAAcAAAACAAAAAAAYAAgAAAACAAEAAAAYAAkAAAACAAEAAAAYAAoAAAACAAEAAAAYAAsAAAACAAEAAAAYAAwAAAACAAEAAAAYAA0AAAACAAEAAAAYAAYAAAAAAAYAAAAZAAYAAAABAAYAAAAaAAUAAAAAAAYAAAAbAAUAAAABAAYAAAAcAAQAAAAAAAQAAAAdAAMAAAAAAAQAAAAeAAIAAAAAAAQAAAAfAAEAAAAAAAQAAAA=")
+tile_set = SubResource("TileSet_f6vtx")
+rendering_quadrant_size = 8
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(10, 10)
+anchor_mode = 0
+
+[node name="Dung" parent="." node_paths=PackedStringArray("beetle_body") instance=ExtResource("4_ucnpi")]
+position = Vector2(2467, 43)
+beetle_body = NodePath("../Beetle")

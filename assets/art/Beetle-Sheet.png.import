@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c62ixu325h8vi"
-path="res://.godot/imported/Dung Beetle-Sheet.png-1dc3e2ce51fcb7c38d2b3a9505539350.ctex"
+uid="uid://danwlo4nyu3rg"
+path="res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Dung Beetle-Sheet.png"
-dest_files=["res://.godot/imported/Dung Beetle-Sheet.png-1dc3e2ce51fcb7c38d2b3a9505539350.ctex"]
+source_file="res://assets/art/Beetle-Sheet.png"
+dest_files=["res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"]
 
 [params]
 
