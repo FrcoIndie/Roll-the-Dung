@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx7hda8wkl1ox"]
+
+[ext_resource type="Script" path="res://scripts/deform_component.gd" id="1_ngfxw"]
+
+[node name="DeformComponent" type="Node2D"]
+script = ExtResource("1_ngfxw")

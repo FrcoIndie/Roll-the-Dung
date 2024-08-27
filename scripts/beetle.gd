@@ -1,112 +1,105 @@
 extends CharacterBody2D
 
 
+@onready var state_chart: StateChart = $StateChart
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
+@onready var collision_shape_2d_roll: CollisionShape2D = $CollisionShape2DRoll
+@onready var collision_polygon_2d_bend: CollisionPolygon2D = $CollisionPolygon2DBend
+@onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
+@onready var ray_cast_2d_right: RayCast2D = $RayCast2DRight
 
-@export var dung_body: RigidBody2D
+@export_subgroup("Components")
+@export var gravity_component: GravityComponent
+@export var input_component: InputComponent
+@export var movement_component: MovementComponent
+@export var animation_component: AnimationComponent
+@export var forces_component: ForcesComponent
+@export var deform_component: DeformComponent
 
-const SPEED: float = 450.0
-const BASE_PUSH_FORCE: float = 10.0
-
-var near_dung: bool = false # When the beetle enters in the Area2D margin of the dung
-var crossing: bool = false # Flag to prevent normal movement when the beetle is crossing the ball
-var push_force: float = BASE_PUSH_FORCE
-var forces_active: bool = true
-var flag_down: bool = true # Flag to avoid the "down" animation from looping
+var direction: Vector2 = Vector2.ZERO
+var near_dung: float = 0.0
 
 
 func _physics_process(delta: float) -> void:
-	var direction := Input.get_vector("move_left", "move_right", "move_down", "")
-	beetle_movement(direction, delta)
-	move_and_slide()
-	beetle_forces(forces_active)
-
-
-# Movement and animation handler of the beetle
-func beetle_movement(direction, delta):
+	direction = input_component.direction
+	
+	# Components
+	gravity_component.handle_gravity(self, delta)
+	forces_component.beetle_forces(self)
+	
+	dung_detection()
+	# State Charts' Transitions
 	if is_on_floor():
-		if Input.is_action_pressed("action") && near_dung:
-			ignore_dung(true)
-			crossing = true
-			if direction == Vector2(1, 0):
-				animated_sprite_2d.flip_h = false
-				animated_sprite_2d.play("walk")
-				velocity.x = direction.x * SPEED
-			elif direction == Vector2(-1, 0):
-				animated_sprite_2d.flip_h = true
-				animated_sprite_2d.play("walk")
-				velocity.x = direction.x * SPEED
+		if direction == Vector2.ZERO:
+			state_chart.send_event("idling")
+		elif abs(direction.x) != 0.0 and direction.y == 0.0:
+			state_chart.send_event("walking")
+			if sign(near_dung) == sign(direction.x):
+				state_chart.send_event("dunging")
+		elif direction.y > 0.0:
+			state_chart.send_event("rolling")
+		elif direction.y < 0.0:
+			state_chart.send_event("bending")
+	else:
+		if direction.y > 0.0:
+			state_chart.send_event("rolling")
 		else:
-			if !crossing:
-				ignore_dung(false)
-				if Input.is_action_just_released("move_down"):
-					push_force = 2000.0
-				if direction.y < 0:
-					push_force = BASE_PUSH_FORCE
-					velocity.x = move_toward(velocity.x, 0, SPEED)
-					if flag_down:
-						animated_sprite_2d.play("down")
-						flag_down = false
-					collision_down(true)
-				else:
-					flag_down = true
-					collision_down(false)
-					if direction == Vector2(1, 0):
-						animated_sprite_2d.flip_h = false
-						if near_dung:
-							animated_sprite_2d.play("dung")
-						else:
-							animated_sprite_2d.play("walk")
-						velocity.x = direction.x * SPEED
-						push_force = BASE_PUSH_FORCE
-					elif direction == Vector2(-1, 0):
-						animated_sprite_2d.flip_h = true
-						if near_dung:
-							animated_sprite_2d.play("dung")
-						else:
-							animated_sprite_2d.play("walk")
-						velocity.x = direction.x * SPEED
-						push_force = BASE_PUSH_FORCE
-					else:
-						animated_sprite_2d.play("idle")
-						velocity.x = move_toward(velocity.x, 0, SPEED)
+			state_chart.send_event("falling")
+	
+	move_and_slide()
+
+
+func dung_detection():
+	if ray_cast_2d_left.is_colliding():
+		near_dung = -1
+	elif ray_cast_2d_right.is_colliding():
+		near_dung = 1
 	else:
-		animated_sprite_2d.play("fall")
-		velocity += get_gravity() * delta
+		near_dung = 0
 
 
-# Forces applied to the dung ball
-func beetle_forces(active):
-	if active:
-		for i in get_slide_collision_count():
-			var c = get_slide_collision(i)
-			if c.get_collider() is RigidBody2D:
-				c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+# Idle State
+func _on_idle_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "decel", direction, delta)
+	animation_component.animate(self, "idle", direction)
+	deform_component.change_collision_shape(collision_shape_2d)
 
 
-# Conveniences when we press "action"
-func ignore_dung(active):
-	if active:
-		z_index = 1
-		set_collision_mask_value(3, false)
-		dung_body.set_collision_mask_value(2, false)
-	else:
-		z_index = 3
-		set_collision_mask_value(3, true)
-		dung_body.set_collision_mask_value(2, true)
+# Walk State
+func _on_walk_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "accel", direction, delta)
+	animation_component.animate(self, "walk", direction)
+	deform_component.change_collision_shape(collision_shape_2d)
 
 
-# Conveniences when we press "move_down"
-func collision_down(active):
-	if active:
-		collision_shape_2d.disabled = true
-		collision_polygon_2d.disabled = false
-		set_collision_mask_value(3, false)
-		#beetle_forces(false)
-	else:
-		collision_shape_2d.disabled = false
-		collision_polygon_2d.disabled = true
-		set_collision_mask_value(3, true)
-		#beetle_forces(true)
+# Dung State
+func _on_dung_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "accel", direction, delta)
+	animation_component.animate(self, "dung", direction)
+	deform_component.change_collision_shape(collision_shape_2d)
+
+
+# Roll State
+func _on_roll_state_entered() -> void:
+	animation_component.animate(self, "roll", direction)
+	deform_component.change_collision_shape(collision_shape_2d_roll)
+
+func _on_roll_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "roll", direction, delta)
+
+
+# Bend State
+func _on_bend_state_entered() -> void:
+	animation_component.animate(self, "bend", direction)
+	deform_component.change_collision_shape(collision_polygon_2d_bend)
+
+func _on_bend_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "decel", direction, delta)
+
+
+# Fall State
+func _on_fall_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "fall", direction, delta)
+	animation_component.animate(self, "fall", direction)
+	deform_component.change_collision_shape(collision_shape_2d)

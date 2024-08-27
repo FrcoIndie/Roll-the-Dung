@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=49 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
 [ext_resource type="Texture2D" uid="uid://bx8nqo13nyp68" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
@@ -249,11 +249,16 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_axas7"]
-size = Vector2(8.00003, 7.99997)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nunp4"]
+radius = 4.0
+height = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c743n"]
 radius = 4.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ovpjc"]
+radius = 4.0
+height = 12.0
 
 [node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component", "deform_component")]
 collision_layer = 2
@@ -268,13 +273,14 @@ forces_component = NodePath("ForcesComponent")
 deform_component = NodePath("DeformComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_l4t8v")
-animation = &"dung"
+animation = &"turn"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_axas7")
+shape = SubResource("CapsuleShape2D_nunp4")
 
 [node name="CollisionShape2DRoll" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_c743n")
@@ -284,14 +290,11 @@ disabled = true
 polygon = PackedVector2Array(8, 4, -7, 4, 0, -1)
 disabled = true
 
-[node name="RayCast2DLeft" type="RayCast2D" parent="."]
-rotation = 1.5708
-target_position = Vector2(2.62268e-07, 6)
-collision_mask = 4
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="RayCast2DRight" type="RayCast2D" parent="."]
-target_position = Vector2(6, 0)
-collision_mask = 4
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ovpjc")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_lsb30")
@@ -357,34 +360,10 @@ delay_in_seconds = "0.0"
 [node name="Dung" type="Node" parent="StateChart/Root"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Idle")
-event = &"idling"
-delay_in_seconds = "0.0"
-
-[node name="ToWalk" type="Node" parent="StateChart/Root/Dung"]
+[node name="Transition" type="Node" parent="StateChart/Root/Dung"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
 event = &"walking"
-delay_in_seconds = "0.0"
-
-[node name="ToRoll" type="Node" parent="StateChart/Root/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Roll")
-event = &"rolling"
-delay_in_seconds = "0.0"
-
-[node name="ToBend" type="Node" parent="StateChart/Root/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Bend")
-event = &"bending"
-delay_in_seconds = "0.0"
-
-[node name="ToFall" type="Node" parent="StateChart/Root/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Fall")
-event = &"falling"
 delay_in_seconds = "0.0"
 
 [node name="Roll" type="Node" parent="StateChart/Root"]
@@ -472,6 +451,8 @@ script = ExtResource("12_7yq2o")
 script = ExtResource("13_hd5mx")
 shapes = [NodePath("../CollisionShape2D"), NodePath("../CollisionShape2DRoll"), NodePath("../CollisionPolygon2DBend")]
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Walk" to="." method="_on_walk_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Dung" to="." method="_on_dung_state_physics_processing"]
