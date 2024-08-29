@@ -1,149 +1,140 @@
 [gd_scene load_steps=48 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
-[ext_resource type="Texture2D" uid="uid://bx8nqo13nyp68" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
+[ext_resource type="Texture2D" uid="uid://baulj5x82tqjm" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_lsb30"]
 [ext_resource type="Script" path="res://scripts/input_component.gd" id="3_oys3y"]
 [ext_resource type="Script" path="res://scripts/movement_component.gd" id="3_t77q0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="4_6xsnh"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_hl1vr"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_0ylmh"]
 [ext_resource type="Script" path="res://scripts/gravity_component.gd" id="5_ur1ma"]
 [ext_resource type="Script" path="res://scripts/animation_component.gd" id="6_5pxr3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_ybrag"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="7_rpjem"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="8_2fcgt"]
 [ext_resource type="Script" path="res://scripts/forces_component.gd" id="12_7yq2o"]
 [ext_resource type="Script" path="res://scripts/deform_component.gd" id="13_hd5mx"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i8i17"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2m28h"]
-atlas = SubResource("CompressedTexture2D_i8i17")
-region = Rect2(32, 80, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pk1j5"]
-atlas = SubResource("CompressedTexture2D_i8i17")
-region = Rect2(64, 80, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0k2y"]
-atlas = SubResource("CompressedTexture2D_i8i17")
-region = Rect2(96, 80, 32, 16)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sfd2g"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eercq"]
-atlas = SubResource("CompressedTexture2D_sfd2g")
-region = Rect2(32, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6s46"]
-atlas = SubResource("CompressedTexture2D_sfd2g")
-region = Rect2(64, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2lqxo"]
-atlas = SubResource("CompressedTexture2D_sfd2g")
-region = Rect2(96, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gnqe3"]
-atlas = SubResource("CompressedTexture2D_sfd2g")
-region = Rect2(128, 32, 32, 16)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mdlte"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rrm5d"]
-atlas = SubResource("CompressedTexture2D_mdlte")
-region = Rect2(32, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3bu8a"]
-atlas = SubResource("CompressedTexture2D_mdlte")
-region = Rect2(64, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ymovs"]
-atlas = SubResource("CompressedTexture2D_mdlte")
-region = Rect2(96, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2p008"]
-atlas = SubResource("CompressedTexture2D_mdlte")
-region = Rect2(128, 48, 32, 16)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iccxm"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1d1j8"]
-atlas = SubResource("CompressedTexture2D_iccxm")
-region = Rect2(32, 0, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ietba"]
-atlas = SubResource("CompressedTexture2D_iccxm")
-region = Rect2(64, 0, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l1yh"]
-atlas = SubResource("CompressedTexture2D_iccxm")
-region = Rect2(96, 0, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3srwr"]
-atlas = SubResource("CompressedTexture2D_iccxm")
-region = Rect2(128, 0, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vlgnn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_g40oq"]
 atlas = ExtResource("2_6u6jl")
-region = Rect2(32, 96, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3skds"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(64, 96, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_leo6d"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(96, 96, 32, 16)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wxy43"]
-load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_02afq"]
-atlas = SubResource("CompressedTexture2D_wxy43")
 region = Rect2(32, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tgble"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6a70"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(64, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ctyxs"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_chrak"]
+load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6bg1"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(32, 80, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7et8r"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(64, 80, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glci4"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(96, 80, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbpqu"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(32, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u37lh"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(64, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjiqq"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(96, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whixm"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(128, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmhca"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(32, 96, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v4wr"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(64, 96, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j36os"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(96, 96, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v06i4"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(128, 96, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58xee"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbleo"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ui8oa"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(96, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgksa"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(128, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imkc7"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14xim"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vxyt"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0all"]
+atlas = SubResource("CompressedTexture2D_chrak")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt556"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(96, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3du3b"]
-atlas = SubResource("CompressedTexture2D_wxy43")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wwr5"]
+atlas = ExtResource("2_6u6jl")
 region = Rect2(128, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2krpg"]
-atlas = SubResource("CompressedTexture2D_mdlte")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtada"]
+atlas = SubResource("CompressedTexture2D_chrak")
 region = Rect2(32, 16, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rn508"]
-atlas = SubResource("CompressedTexture2D_mdlte")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uouei"]
+atlas = SubResource("CompressedTexture2D_chrak")
 region = Rect2(64, 16, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nkl35"]
-atlas = SubResource("CompressedTexture2D_mdlte")
+[sub_resource type="AtlasTexture" id="AtlasTexture_8frqn"]
+atlas = SubResource("CompressedTexture2D_chrak")
 region = Rect2(96, 16, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nv0h7"]
-atlas = SubResource("CompressedTexture2D_mdlte")
+[sub_resource type="AtlasTexture" id="AtlasTexture_iviqc"]
+atlas = SubResource("CompressedTexture2D_chrak")
 region = Rect2(128, 16, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l4t8v"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2m28h")
+"texture": SubResource("AtlasTexture_g40oq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pk1j5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0k2y")
+"texture": SubResource("AtlasTexture_c6a70")
 }],
 "loop": false,
 "name": &"bend",
@@ -151,16 +142,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eercq")
+"texture": SubResource("AtlasTexture_d6bg1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i6s46")
+"texture": SubResource("AtlasTexture_7et8r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2lqxo")
+"texture": SubResource("AtlasTexture_glci4")
+}],
+"loop": false,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbpqu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gnqe3")
+"texture": SubResource("AtlasTexture_u37lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjiqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whixm")
 }],
 "loop": true,
 "name": &"dung",
@@ -168,33 +173,50 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rrm5d")
+"texture": SubResource("AtlasTexture_mmhca")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3bu8a")
+"texture": SubResource("AtlasTexture_5v4wr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ymovs")
+"texture": SubResource("AtlasTexture_j36os")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2p008")
+"texture": SubResource("AtlasTexture_v06i4")
 }],
 "loop": true,
 "name": &"fall",
-"speed": 7.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1d1j8")
+"texture": SubResource("AtlasTexture_58xee")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ietba")
+"texture": SubResource("AtlasTexture_jbleo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6l1yh")
+"texture": SubResource("AtlasTexture_ui8oa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3srwr")
+"texture": SubResource("AtlasTexture_bgksa")
+}],
+"loop": true,
+"name": &"hold",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imkc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14xim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vxyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0all")
 }],
 "loop": true,
 "name": &"idle",
@@ -202,47 +224,27 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vlgnn")
+"texture": SubResource("AtlasTexture_mt556")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3skds")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_leo6d")
+"texture": SubResource("AtlasTexture_4wwr5")
 }],
 "loop": false,
-"name": &"roll",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_02afq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tgble")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ctyxs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3du3b")
-}],
-"loop": false,
-"name": &"turn",
+"name": &"throw",
 "speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2krpg")
+"texture": SubResource("AtlasTexture_xtada")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rn508")
+"texture": SubResource("AtlasTexture_uouei")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nkl35")
+"texture": SubResource("AtlasTexture_8frqn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nv0h7")
+"texture": SubResource("AtlasTexture_iviqc")
 }],
 "loop": true,
 "name": &"walk",
@@ -250,15 +252,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axas7"]
-size = Vector2(8.00003, 7.99997)
+size = Vector2(6, 6)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_c743n"]
-radius = 4.0
+[sub_resource type="Resource" id="Resource_fvo1v"]
+script = ExtResource("8_2fcgt")
+expression = "throwed == true"
+
+[sub_resource type="Resource" id="Resource_ifu0e"]
+script = ExtResource("8_2fcgt")
+expression = "throwed == true"
 
 [node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component", "deform_component")]
 collision_layer = 2
 collision_mask = 7
-floor_max_angle = 0.872665
 script = ExtResource("1_ycl0j")
 gravity_component = NodePath("GravityComponent")
 input_component = NodePath("InputComponent")
@@ -269,187 +275,275 @@ deform_component = NodePath("DeformComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")
-animation = &"dung"
+animation = &"throw"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.96046e-08, 0)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_axas7")
 
-[node name="CollisionShape2DRoll" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_c743n")
-disabled = true
-
 [node name="CollisionPolygon2DBend" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(8, 4, -7, 4, 0, -1)
+polygon = PackedVector2Array(8, 3, -7, 3, -4, 1, 0, 0, 5, 1)
 disabled = true
 
 [node name="RayCast2DLeft" type="RayCast2D" parent="."]
 rotation = 1.5708
-target_position = Vector2(2.62268e-07, 6)
+target_position = Vector2(2.17199e-05, 6)
 collision_mask = 4
 
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
 target_position = Vector2(6, 0)
 collision_mask = 4
 
+[node name="RayCast2DDung" type="RayCast2D" parent="."]
+rotation = 1.5708
+target_position = Vector2(9, -3.25799e-05)
+collision_mask = 4
+
+[node name="RayCast2DFloor" type="RayCast2D" parent="."]
+rotation = 1.5708
+target_position = Vector2(5, -1.81e-05)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.34
+one_shot = true
+
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_lsb30")
 
 [node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_6xsnh")
+
+[node name="BeetleMovement" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_hl1vr")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root"]
+[node name="Idle" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToFall" type="Node" parent="StateChart/Root/Idle"]
+[node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Fall")
-event = &"falling"
+event = &"start_falling"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/Idle"]
+[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"walking"
+event = &"start_walking"
 delay_in_seconds = "0.0"
 
-[node name="ToBend" type="Node" parent="StateChart/Root/Idle"]
+[node name="ToHold" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Hold")
+event = &"approaching_dung"
+delay_in_seconds = "0.0"
+
+[node name="ToBend" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Bend")
-event = &"bending"
+event = &"start_bending"
 delay_in_seconds = "0.0"
 
-[node name="Walk" type="Node" parent="StateChart/Root"]
+[node name="Walk" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Walk"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"idling"
+event = &"to_rest"
 delay_in_seconds = "0.0"
 
-[node name="ToDung" type="Node" parent="StateChart/Root/Walk"]
+[node name="ToHold" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Hold")
+event = &"approaching_dung"
+delay_in_seconds = "0.0"
+
+[node name="ToDung" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Dung")
-event = &"dunging"
+event = &"start_pushing"
 delay_in_seconds = "0.0"
 
-[node name="ToRoll" type="Node" parent="StateChart/Root/Walk"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Roll")
-event = &"rolling"
-delay_in_seconds = "0.0"
-
-[node name="ToBend" type="Node" parent="StateChart/Root/Walk"]
+[node name="ToBend" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Bend")
-event = &"bending"
+event = &"start_bending"
 delay_in_seconds = "0.0"
 
-[node name="ToFall" type="Node" parent="StateChart/Root/Walk"]
+[node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Fall")
-event = &"falling"
+event = &"start_falling"
 delay_in_seconds = "0.0"
 
-[node name="Dung" type="Node" parent="StateChart/Root"]
+[node name="Hold" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Dung"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"idling"
+event = &"to_rest"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/Dung"]
+[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"walking"
+event = &"start_walking"
 delay_in_seconds = "0.0"
 
-[node name="ToRoll" type="Node" parent="StateChart/Root/Dung"]
+[node name="ToDung" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
-to = NodePath("../../Roll")
-event = &"rolling"
+to = NodePath("../../Dung")
+event = &"start_pushing"
 delay_in_seconds = "0.0"
 
-[node name="ToBend" type="Node" parent="StateChart/Root/Dung"]
+[node name="ToClimb" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
-to = NodePath("../../Bend")
-event = &"bending"
+to = NodePath("../../Climb")
+event = &"start_climbing"
 delay_in_seconds = "0.0"
 
-[node name="ToFall" type="Node" parent="StateChart/Root/Dung"]
+[node name="Dung" type="Node" parent="StateChart/Root/BeetleMovement"]
+script = ExtResource("5_0ylmh")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Idle")
+event = &"to_rest"
+delay_in_seconds = "0.0"
+
+[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Walk")
+event = &"start_walking"
+delay_in_seconds = "0.0"
+
+[node name="ToHold" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Hold")
+event = &"stop_pushing"
+delay_in_seconds = "0.0"
+
+[node name="ToClimb" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Climb")
+event = &"start_climbing"
+delay_in_seconds = "0.0"
+
+[node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Fall")
-event = &"falling"
+event = &"start_falling"
 delay_in_seconds = "0.0"
 
-[node name="Roll" type="Node" parent="StateChart/Root"]
+[node name="Bend" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Roll"]
+[node name="ToThrow" type="Node" parent="StateChart/Root/BeetleMovement/Bend"]
 script = ExtResource("6_ybrag")
-to = NodePath("../../Idle")
-event = &"idling"
+to = NodePath("../../Throw")
+event = &"bend_to_throw"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/Roll"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Walk")
-event = &"walking"
-delay_in_seconds = "0.0"
-
-[node name="Bend" type="Node" parent="StateChart/Root"]
+[node name="Throw" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Bend"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Throw"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"idling"
+event = &"to_rest"
+guard = SubResource("Resource_fvo1v")
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/Bend"]
+[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Throw"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"walking"
+event = &"start_walking"
+guard = SubResource("Resource_ifu0e")
 delay_in_seconds = "0.0"
 
-[node name="Fall" type="Node" parent="StateChart/Root"]
+[node name="Climb" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Fall"]
+[node name="Fall" type="Node" parent="StateChart/Root/BeetleMovement"]
+script = ExtResource("5_0ylmh")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Fall"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"idling"
+event = &"to_rest"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/Fall"]
+[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Fall"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"walking"
+event = &"start_walking"
 delay_in_seconds = "0.0"
 
-[node name="ToRoll" type="Node" parent="StateChart/Root/Fall"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Roll")
-event = &"rolling"
-delay_in_seconds = "0.0"
-
-[node name="ToBend" type="Node" parent="StateChart/Root/Fall"]
+[node name="ToBend" type="Node" parent="StateChart/Root/BeetleMovement/Fall"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Bend")
-event = &"bending"
+event = &"start_bending"
+delay_in_seconds = "0.0"
+
+[node name="RelativeToDung" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_hl1vr")
+initial_state = NodePath("Far")
+
+[node name="Far" type="Node" parent="StateChart/Root/RelativeToDung"]
+script = ExtResource("5_0ylmh")
+
+[node name="ToBeside" type="Node" parent="StateChart/Root/RelativeToDung/Far"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Beside")
+event = &"approaching"
+delay_in_seconds = "0.0"
+
+[node name="ToOver" type="Node" parent="StateChart/Root/RelativeToDung/Far"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Over")
+event = &"landing_in"
+delay_in_seconds = "0.0"
+
+[node name="Beside" type="Node" parent="StateChart/Root/RelativeToDung"]
+script = ExtResource("5_0ylmh")
+
+[node name="ToFar" type="Node" parent="StateChart/Root/RelativeToDung/Beside"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Far")
+event = &"moving_away"
+delay_in_seconds = "0.0"
+
+[node name="ToOver" type="Node" parent="StateChart/Root/RelativeToDung/Beside"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Over")
+event = &"climbing"
+delay_in_seconds = "0.0"
+
+[node name="Over" type="Node" parent="StateChart/Root/RelativeToDung"]
+script = ExtResource("5_0ylmh")
+
+[node name="ToFar" type="Node" parent="StateChart/Root/RelativeToDung/Over"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Far")
+event = &"falling_off"
+delay_in_seconds = "0.0"
+
+[node name="ToBeside" type="Node" parent="StateChart/Root/RelativeToDung/Over"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Beside")
+event = &"de-climbing"
 delay_in_seconds = "0.0"
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("7_rpjem")]
-offset_left = -63.0
-offset_top = -51.0
-offset_right = 272.0
-offset_bottom = 179.0
-scale = Vector2(0.2, 0.2)
+offset_left = -67.0
+offset_top = -55.0
+offset_right = 327.0
+offset_bottom = 272.0
+scale = Vector2(0.15, 0.15)
 initial_node_to_watch = NodePath("../StateChart")
 
 [node name="GravityComponent" type="Node2D" parent="."]
@@ -470,13 +564,19 @@ script = ExtResource("12_7yq2o")
 
 [node name="DeformComponent" type="Node2D" parent="." node_paths=PackedStringArray("shapes")]
 script = ExtResource("13_hd5mx")
-shapes = [NodePath("../CollisionShape2D"), NodePath("../CollisionShape2DRoll"), NodePath("../CollisionPolygon2DBend")]
+shapes = [NodePath("../CollisionShape2D"), NodePath("../CollisionPolygon2DBend")]
 
-[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/Walk" to="." method="_on_walk_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/Dung" to="." method="_on_dung_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/Roll" to="." method="_on_roll_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Roll" to="." method="_on_roll_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/Bend" to="." method="_on_bend_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Bend" to="." method="_on_bend_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/Fall" to="." method="_on_fall_state_physics_processing"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Walk" to="." method="_on_walk_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Hold" to="." method="_on_dung_idle_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Dung" to="." method="_on_dung_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/BeetleMovement/Bend" to="." method="_on_bend_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/BeetleMovement/Bend" to="." method="_on_bend_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Bend" to="." method="_on_bend_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/BeetleMovement/Throw" to="." method="_on_throw_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/BeetleMovement/Throw" to="." method="_on_throw_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Throw" to="." method="_on_throw_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/BeetleMovement/Climb" to="." method="_on_climb_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Climb" to="." method="_on_climb_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Fall" to="." method="_on_fall_state_physics_processing"]

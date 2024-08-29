@@ -1,10 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmiabs5bdcwge"]
 
 [ext_resource type="Script" path="res://scripts/dung.gd" id="1_f1ywp"]
-[ext_resource type="Texture2D" uid="uid://dlcqrunoa4oyj" path="res://assets/art/Dung-Sheet.png" id="1_rsxlr"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wcy0y"]
+load_path = "res://.godot/imported/Dung-Sheet.png-5a5a576ce039f9da2bc729d0aac503aa.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x6tyr"]
-radius = 6.0
+radius = 5.0
 
 [node name="Dung" type="RigidBody2D" groups=["Dung"]]
 collision_layer = 4
@@ -13,10 +15,10 @@ mass = 4.0
 script = ExtResource("1_f1ywp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(10, 10)
-texture = ExtResource("1_rsxlr")
+scale = Vector2(7, 7)
+texture = SubResource("CompressedTexture2D_wcy0y")
 hframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(10, 10)
+scale = Vector2(7, 7)
 shape = SubResource("CircleShape2D_x6tyr")
