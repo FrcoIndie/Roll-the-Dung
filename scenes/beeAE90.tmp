@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=58 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
 [ext_resource type="Texture2D" uid="uid://dcb6p02pcwpcm" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/gravity_component.gd" id="5_ur1ma"]
 [ext_resource type="Script" path="res://scripts/animation_component.gd" id="6_5pxr3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_ybrag"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="7_rpjem"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="8_2fcgt"]
 [ext_resource type="Script" path="res://scripts/forces_component.gd" id="12_7yq2o"]
 [ext_resource type="Script" path="res://scripts/deform_component.gd" id="13_hd5mx"]
@@ -288,6 +289,10 @@ expression = "over_dung == false"
 script = ExtResource("8_2fcgt")
 expression = "over_dung == false"
 
+[sub_resource type="Resource" id="Resource_5dr6p"]
+script = ExtResource("8_2fcgt")
+expression = ""
+
 [sub_resource type="Resource" id="Resource_fvo1v"]
 script = ExtResource("8_2fcgt")
 expression = "throwed == true"
@@ -305,9 +310,8 @@ script = ExtResource("8_2fcgt")
 expression = "over_dung == true"
 
 [node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component", "deform_component")]
-scale = Vector2(7, 7)
 collision_layer = 2
-collision_mask = 23
+collision_mask = 7
 floor_constant_speed = true
 script = ExtResource("1_ycl0j")
 gravity_component = NodePath("GravityComponent")
@@ -316,7 +320,6 @@ movement_component = NodePath("MovementComponent")
 animation_component = NodePath("AnimationComponent")
 forces_component = NodePath("ForcesComponent")
 deform_component = NodePath("DeformComponent")
-BASE_PUSH_FORCE = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")
@@ -324,6 +327,8 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.96046e-08, 0)
+rotation = 1.5708
 shape = SubResource("RectangleShape2D_axas7")
 
 [node name="CollisionPolygon2DBend" type="CollisionPolygon2D" parent="."]
@@ -331,12 +336,10 @@ polygon = PackedVector2Array(8, 3, -7, 3, -4, 1, 0, 0, 5, 1)
 disabled = true
 
 [node name="RayCast2DLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -0.714286)
 target_position = Vector2(-5, 0)
 collision_mask = 4
 
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
-position = Vector2(0, -0.714286)
 target_position = Vector2(5, 0)
 collision_mask = 4
 
@@ -344,6 +347,9 @@ collision_mask = 4
 rotation = 1.5708
 target_position = Vector2(9, -3.25799e-05)
 collision_mask = 4
+
+[node name="RayCast2DFloor" type="RayCast2D" parent="."]
+target_position = Vector2(0, 6)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.34
@@ -488,6 +494,7 @@ script = ExtResource("5_0ylmh")
 script = ExtResource("6_ybrag")
 to = NodePath("../../Throw")
 event = &"bend_to_throw"
+guard = SubResource("Resource_5dr6p")
 delay_in_seconds = "0.0"
 
 [node name="Throw" type="Node" parent="StateChart/Root/BeetleMovement"]
@@ -593,6 +600,14 @@ script = ExtResource("6_ybrag")
 to = NodePath("../../Beside")
 event = &"moving_away_from_dung"
 delay_in_seconds = "0.0"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("7_rpjem")]
+offset_left = -67.0
+offset_top = -55.0
+offset_right = 327.0
+offset_bottom = 272.0
+scale = Vector2(0.15, 0.15)
+initial_node_to_watch = NodePath("../StateChart")
 
 [node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_ur1ma")

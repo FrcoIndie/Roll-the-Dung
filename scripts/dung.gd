@@ -1,22 +1,11 @@
-extends RigidBody2D
+extends Node2D
 
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-
-@export var dung_n: int = clamp(0, 10, 1)
+@export_subgroup("")
+@export var dung_ball: RigidBody2D
 
 
-func _ready() -> void:
-	dung_size(dung_n)
-
-
-func _process(delta: float) -> void:
-	pass
-
-
-# To manage the size and weight of the dung ball
-func dung_size(n: int):
-	mass = n
-	sprite_2d.frame = n
-	collision_shape_2d.shape.radius = 5 + n
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body == dung_ball:
+		dung_ball.dung_size(clamp(dung_ball.dung_n + 1, 0, 10))
+		queue_free()

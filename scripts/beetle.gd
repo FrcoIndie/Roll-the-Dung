@@ -9,7 +9,6 @@ extends CharacterBody2D
 @onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
 @onready var ray_cast_2d_right: RayCast2D = $RayCast2DRight
 @onready var ray_cast_2d_dung: RayCast2D = $RayCast2DDung
-@onready var ray_cast_2d_floor: RayCast2D = $RayCast2DFloor
 @onready var timer: Timer = $Timer
 
 @export_subgroup("Components")
@@ -22,12 +21,12 @@ extends CharacterBody2D
 
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
-
-const BASE_PUSH_FORCE: float = 10.0
+@export var BASE_PUSH_FORCE: float = 10.0
 
 var direction: float = 0.0
 var over_dung: bool = false
-var near_dung: int = 0
+var near_dung: int = 0 # The beetle is standing besides the dung when != 0, -1: (D)B | 1: B(D)
+var dung_position: int = near_dung # To keep track if the dung is at the left or at the right of the beetle
 var push_force: float = BASE_PUSH_FORCE
 var throwed: bool = true
 
@@ -41,8 +40,10 @@ func _physics_process(delta: float) -> void:
 	forces_component.beetle_forces(self, push_force)
 	
 	dung_detection()
+	velocity.x = clamp(velocity.x, -movement_component.max_speed, movement_component.max_speed)
 	
 	state_chart.set_expression_property("throwed", throwed)
+	state_chart.set_expression_property("over_dung", over_dung)
 	# BeetleMovement States' Transitions
 	if is_on_floor():
 		if Input.is_action_just_released("bend"):
@@ -52,6 +53,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			if direction == 0.0 and near_dung == 0:
 				state_chart.send_event("to_rest")
+			elif near_dung != 0 and Input.is_action_pressed("climb"):
+				state_chart.send_event("start_climbing")
 			elif direction != 0:
 				state_chart.send_event("start_walking")
 				if sign(near_dung) == sign(direction):
@@ -64,14 +67,24 @@ func _physics_process(delta: float) -> void:
 
 # Dung Detection
 func dung_detection():
-	if ray_cast_2d_left.is_colliding():
+	ray_cast_2d_left.target_position.x = -5 - sqrt(dung_ball.dung_n)
+	ray_cast_2d_right.target_position.x = 5 + sqrt(dung_ball.dung_n)
+	
+	if dung_ball.position.x < position.x:
+		dung_position = -1
+	else:
+		dung_position = 1
+	
+	# Vertical positioning
+	if ray_cast_2d_dung.is_colliding():
+		state_chart.send_event("stepping_dung")
+		over_dung = true
+	elif ray_cast_2d_left.is_colliding():
 		state_chart.send_event("approaching_dung")
 		near_dung = -1
 	elif ray_cast_2d_right.is_colliding():
 		state_chart.send_event("approaching_dung")
 		near_dung = 1
-	elif ray_cast_2d_dung.is_colliding():
-		state_chart.send_event("standing_on_dung")
 	else:
 		state_chart.send_event("moving_away_from_dung")
 		near_dung = 0
@@ -136,26 +149,44 @@ func _on_throw_state_exited() -> void:
 func _on_timer_timeout() -> void:
 	throwed = true
 
-# 1.7. Climb State
-#func _on_climb_state_entered() -> void:
-	#animation_component.animate(self, "climb", direction)
 
-#func _on_climb_state_physics_processing(delta: float) -> void:
-	#set_collision_layer_value(2, false)
-	##set_collision_mask_value(3, false)
-	##forces_component.beetle_forces(self, 0.0)
-	#var dung_n = dung_ball.dung_n
-	#var x = near_dung * (1 + dung_ball.collision_shape_2d.shape.radius) * 5
-	#var y = (dung_ball.collision_shape_2d.shape.radius - 2) * 5
-	#match animated_sprite_2d.frame:
-		#0:
-			#position.x = dung_ball.position.x - x
-		#1:
-			#position.x = dung_ball.position.x - x
-			#position.y = dung_ball.position.y
-		#2:
-			#position.x = dung_ball.position.x - x
-			#position.y = dung_ball.position.y
+# 1.7. Climb State
+func _on_climb_state_entered() -> void:
+	animation_component.animate(self, "climb", direction)
+	#var tween := get_tree().create_tween()
+	#tween.tween_property(self, "position", Vector2(dung_ball.position.x - x - dung_position*c, dung_ball.position.y), 0.125*sqrt(dung_ball.dung_n))
+	#tween.tween_property(self, "position", Vector2(dung_ball.position.x, dung_ball.position.y - y - c), 0.25*sqrt(dung_ball.dung_n))
+
+func _on_climb_state_physics_processing(delta: float) -> void:
+	movement_component.beetle_movement(self, "decel", direction, delta)
+	collision_shape_2d.disabled = true
+	gravity_component.gravity = 0.0
+	
+	var c = collision_shape_2d.shape.size.x/2 * scale.x
+	var x = dung_position * (dung_ball.collision_shape_2d.shape.radius) * scale.x
+	var y = (dung_ball.collision_shape_2d.shape.radius) * scale.x
+	match animated_sprite_2d.frame:
+		0:
+			pass
+		1:
+			position.x = dung_ball.position.x - x
+			position.y = dung_ball.position.y + y/2
+		2:
+			position.x = dung_ball.position.x - 3*x/4
+			position.y = dung_ball.position.y
+		3:
+			position.x = dung_ball.position.x - 3*x/4 + dung_position * c
+			position.y = dung_ball.position.y - y/3
+		4:
+			position.x = dung_ball.position.x
+			position.y = dung_ball.position.y - 2*y/3
+		5:
+			position.x = dung_ball.position.x
+			position.y = dung_ball.position.y - y - c
+	
+	if !animated_sprite_2d.is_playing():
+		collision_shape_2d.disabled = false
+		gravity_component.gravity = 600.0
 
 
 # 1.7. Fall State
@@ -172,3 +203,13 @@ func _on_fall_state_physics_processing(delta: float) -> void:
 
 
 # 2.3. Over State
+func _on_over_state_physics_processing(delta: float) -> void:
+	set_collision_layer_value(2, false)
+	push_force = 0.0
+	#collision_shape_2d.shape.size.x = 2
+
+func _on_over_state_exited() -> void:
+	set_collision_layer_value(2, true)
+	push_force = BASE_PUSH_FORCE
+	#collision_shape_2d.shape.size.x = 6
+	over_dung = false

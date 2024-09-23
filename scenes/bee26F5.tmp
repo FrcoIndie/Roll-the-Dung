@@ -1,7 +1,7 @@
-[gd_scene load_steps=56 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=52 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
-[ext_resource type="Texture2D" uid="uid://dcb6p02pcwpcm" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
+[ext_resource type="Texture2D" uid="uid://whohfusrefm5" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_lsb30"]
 [ext_resource type="Script" path="res://scripts/input_component.gd" id="3_oys3y"]
 [ext_resource type="Script" path="res://scripts/movement_component.gd" id="3_t77q0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/gravity_component.gd" id="5_ur1ma"]
 [ext_resource type="Script" path="res://scripts/animation_component.gd" id="6_5pxr3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_ybrag"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="7_rpjem"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="8_2fcgt"]
 [ext_resource type="Script" path="res://scripts/forces_component.gd" id="12_7yq2o"]
 [ext_resource type="Script" path="res://scripts/deform_component.gd" id="13_hd5mx"]
@@ -26,29 +27,25 @@ region = Rect2(32, 64, 32, 16)
 atlas = SubResource("CompressedTexture2D_lp0oi")
 region = Rect2(64, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2153"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x8l4"]
 atlas = ExtResource("2_6u6jl")
 region = Rect2(32, 80, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d7jqo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t7e2"]
 atlas = ExtResource("2_6u6jl")
 region = Rect2(64, 80, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7k8oj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3cl6"]
 atlas = ExtResource("2_6u6jl")
 region = Rect2(96, 80, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8kpp2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgnse"]
 atlas = ExtResource("2_6u6jl")
 region = Rect2(128, 80, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d25ho"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg5f8"]
 atlas = ExtResource("2_6u6jl")
 region = Rect2(160, 80, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_plx2q"]
-atlas = ExtResource("2_6u6jl")
-region = Rect2(192, 80, 32, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nfh4e"]
 load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
@@ -159,22 +156,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s2153")
+"texture": SubResource("AtlasTexture_1x8l4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d7jqo")
+"texture": SubResource("AtlasTexture_5t7e2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7k8oj")
+"texture": SubResource("AtlasTexture_l3cl6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8kpp2")
+"texture": SubResource("AtlasTexture_bgnse")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d25ho")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_plx2q")
+"texture": SubResource("AtlasTexture_gg5f8")
 }],
 "loop": false,
 "name": &"climb",
@@ -280,14 +274,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axas7"]
 size = Vector2(6, 6)
 
-[sub_resource type="Resource" id="Resource_s2tqw"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == false"
-
-[sub_resource type="Resource" id="Resource_xxb7s"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == false"
-
 [sub_resource type="Resource" id="Resource_fvo1v"]
 script = ExtResource("8_2fcgt")
 expression = "throwed == true"
@@ -296,19 +282,9 @@ expression = "throwed == true"
 script = ExtResource("8_2fcgt")
 expression = "throwed == true"
 
-[sub_resource type="Resource" id="Resource_b6mi7"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == true"
-
-[sub_resource type="Resource" id="Resource_bk3to"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == true"
-
 [node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component", "deform_component")]
-scale = Vector2(7, 7)
 collision_layer = 2
-collision_mask = 23
-floor_constant_speed = true
+collision_mask = 7
 script = ExtResource("1_ycl0j")
 gravity_component = NodePath("GravityComponent")
 input_component = NodePath("InputComponent")
@@ -316,14 +292,17 @@ movement_component = NodePath("MovementComponent")
 animation_component = NodePath("AnimationComponent")
 forces_component = NodePath("ForcesComponent")
 deform_component = NodePath("DeformComponent")
-BASE_PUSH_FORCE = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")
-animation = &"idle"
+animation = &"climb"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.96046e-08, 0)
+rotation = 1.5708
 shape = SubResource("RectangleShape2D_axas7")
 
 [node name="CollisionPolygon2DBend" type="CollisionPolygon2D" parent="."]
@@ -331,12 +310,10 @@ polygon = PackedVector2Array(8, 3, -7, 3, -4, 1, 0, 0, 5, 1)
 disabled = true
 
 [node name="RayCast2DLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -0.714286)
 target_position = Vector2(-5, 0)
 collision_mask = 4
 
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
-position = Vector2(0, -0.714286)
 target_position = Vector2(5, 0)
 collision_mask = 4
 
@@ -384,7 +361,6 @@ delay_in_seconds = "0.0"
 script = ExtResource("6_ybrag")
 to = NodePath("../../Bend")
 event = &"start_bending"
-guard = SubResource("Resource_s2tqw")
 delay_in_seconds = "0.0"
 
 [node name="Walk" type="Node" parent="StateChart/Root/BeetleMovement"]
@@ -412,7 +388,6 @@ delay_in_seconds = "0.0"
 script = ExtResource("6_ybrag")
 to = NodePath("../../Bend")
 event = &"start_bending"
-guard = SubResource("Resource_xxb7s")
 delay_in_seconds = "0.0"
 
 [node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
@@ -510,20 +485,6 @@ delay_in_seconds = "0.0"
 [node name="Climb" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Climb"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Idle")
-event = &"to_rest"
-guard = SubResource("Resource_b6mi7")
-delay_in_seconds = "0.0"
-
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Climb"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Walk")
-event = &"start_walking"
-guard = SubResource("Resource_bk3to")
-delay_in_seconds = "0.0"
-
 [node name="Fall" type="Node" parent="StateChart/Root/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
@@ -555,13 +516,13 @@ script = ExtResource("5_0ylmh")
 [node name="ToBeside" type="Node" parent="StateChart/Root/RelativeToDung/Far"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Beside")
-event = &"approaching_dung"
+event = &"approaching"
 delay_in_seconds = "0.0"
 
 [node name="ToOver" type="Node" parent="StateChart/Root/RelativeToDung/Far"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Over")
-event = &"stepping_dung"
+event = &"landing_in"
 delay_in_seconds = "0.0"
 
 [node name="Beside" type="Node" parent="StateChart/Root/RelativeToDung"]
@@ -570,13 +531,13 @@ script = ExtResource("5_0ylmh")
 [node name="ToFar" type="Node" parent="StateChart/Root/RelativeToDung/Beside"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Far")
-event = &"moving_away_from_dung"
+event = &"moving_away"
 delay_in_seconds = "0.0"
 
 [node name="ToOver" type="Node" parent="StateChart/Root/RelativeToDung/Beside"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Over")
-event = &"stepping_dung"
+event = &"climbing"
 delay_in_seconds = "0.0"
 
 [node name="Over" type="Node" parent="StateChart/Root/RelativeToDung"]
@@ -585,14 +546,22 @@ script = ExtResource("5_0ylmh")
 [node name="ToFar" type="Node" parent="StateChart/Root/RelativeToDung/Over"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Far")
-event = &"moving_away_from_dung"
+event = &"falling_off"
 delay_in_seconds = "0.0"
 
 [node name="ToBeside" type="Node" parent="StateChart/Root/RelativeToDung/Over"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Beside")
-event = &"moving_away_from_dung"
+event = &"de-climbing"
 delay_in_seconds = "0.0"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("7_rpjem")]
+offset_left = -67.0
+offset_top = -55.0
+offset_right = 327.0
+offset_bottom = 272.0
+scale = Vector2(0.15, 0.15)
+initial_node_to_watch = NodePath("../StateChart")
 
 [node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_ur1ma")
@@ -628,5 +597,3 @@ shapes = [NodePath("../CollisionShape2D"), NodePath("../CollisionPolygon2DBend")
 [connection signal="state_entered" from="StateChart/Root/BeetleMovement/Climb" to="." method="_on_climb_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Climb" to="." method="_on_climb_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Fall" to="." method="_on_fall_state_physics_processing"]
-[connection signal="state_exited" from="StateChart/Root/RelativeToDung/Over" to="." method="_on_over_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/RelativeToDung/Over" to="." method="_on_over_state_physics_processing"]

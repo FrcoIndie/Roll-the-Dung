@@ -1,24 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmiabs5bdcwge"]
+[gd_scene load_steps=4 format=3 uid="uid://c6vt2c5xe50k1"]
 
+[ext_resource type="Texture2D" uid="uid://dhuu80374ig7c" path="res://assets/art/Fragment.png" id="1_exs1n"]
 [ext_resource type="Script" path="res://scripts/dung.gd" id="1_f1ywp"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wcy0y"]
-load_path = "res://.godot/imported/Dung-Sheet.png-5a5a576ce039f9da2bc729d0aac503aa.ctex"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkjev"]
+size = Vector2(4, 2)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x6tyr"]
-radius = 5.0
-
-[node name="Dung" type="RigidBody2D" groups=["Dung"]]
-collision_layer = 4
-collision_mask = 7
-mass = 4.0
+[node name="Dung" type="Node2D"]
+scale = Vector2(7, 7)
 script = ExtResource("1_f1ywp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(7, 7)
-texture = SubResource("CompressedTexture2D_wcy0y")
-hframes = 11
+texture = ExtResource("1_exs1n")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(7, 7)
-shape = SubResource("CircleShape2D_x6tyr")
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3.40598e-08, 1)
+shape = SubResource("RectangleShape2D_kkjev")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcb6p02pcwpcm"
-path="res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
+uid="uid://bd5ox58oqpjdp"
+path="res://.godot/imported/Flag.png-0562dda0e4170c1b0516ab693c1bc43a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Beetle-Sheet.png"
-dest_files=["res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"]
+source_file="res://assets/art/Flag.png"
+dest_files=["res://.godot/imported/Flag.png-0562dda0e4170c1b0516ab693c1bc43a.ctex"]
 
 [params]
 
