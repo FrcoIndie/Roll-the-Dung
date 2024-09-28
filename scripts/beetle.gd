@@ -44,6 +44,11 @@ func _physics_process(delta: float) -> void:
 	
 	state_chart.set_expression_property("throwed", throwed)
 	state_chart.set_expression_property("over_dung", over_dung)
+	# Detect descend from the dung
+	if (!is_on_floor() and near_dung != 0):
+		dung_ball.linear_velocity = Vector2.ZERO
+		dung_ball.angular_velocity = 0
+	
 	# BeetleMovement States' Transitions
 	if is_on_floor():
 		if Input.is_action_just_released("bend"):
