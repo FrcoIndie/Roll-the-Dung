@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cupsl6j6up5m3"]
+[gd_scene load_steps=15 format=4 uid="uid://cupsl6j6up5m3"]
 
 [ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="1_ethko"]
 [ext_resource type="Script" path="res://scripts/test.gd" id="1_s8sya"]
@@ -40,17 +40,26 @@ sources/2 = SubResource("TileSetAtlasSource_hudrl")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axlr7"]
 size = Vector2(11.7143, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2uya8"]
+size = Vector2(40, 1078)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkthp"]
+size = Vector2(34.5004, 1069)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfs41"]
+size = Vector2(1989.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxqvk"]
+size = Vector2(2000, 20)
+
 [node name="Test" type="Node2D"]
 script = ExtResource("1_s8sya")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
 scale = Vector2(7, 7)
-tile_map_data = PackedByteArray("AAACAAcAAgABAAAAAAADAAcAAgABAAAAAAAEAAcAAgABAAAAAAAFAAcAAgABAAEAAAABAAkAAgAAAAEAAAABAAgAAgAAAAEAAAACAAgAAgABAAEAAAADAAgAAgABAAEAAAAEAAgAAgABAAEAAAAFAAgAAgABAAEAAAAFAAkAAgABAAEAAAAEAAkAAgABAAEAAAADAAkAAgABAAEAAAACAAkAAgABAAEAAAAGAAcAAgABAAEAAAAGAAgAAgABAAEAAAAGAAkAAgABAAEAAAAHAAcAAgABAAEAAAAIAAcAAgABAAEAAAAIAAgAAgABAAEAAAAHAAgAAgABAAEAAAAHAAkAAgABAAEAAAAIAAkAAgABAAEAAAAJAAcAAgABAAEAAAAJAAgAAgABAAEAAAAJAAkAAgABAAEAAAAKAAYAAgABAAEAAAAKAAcAAgABAAEAAAAKAAgAAgABAAEAAAAKAAkAAgABAAEAAAALAAUAAgABAAAAAAALAAYAAgABAAEAAAALAAcAAgABAAEAAAALAAgAAgABAAEAAAALAAkAAgABAAEAAAAMAAgAAgABAAEAAAAMAAcAAgABAAEAAAAMAAYAAgABAAEAAAAMAAUAAgABAAAAAAAMAAkAAgABAAEAAAANAAUAAgACAAAAAAANAAYAAgACAAEAAAANAAcAAgACAAEAAAANAAgAAgACAAEAAAANAAkAAgACAAEAAAABAAcAAgAAAAAAAAAKAAUAAgAAAAAAAAAGAAYAAgABAAYAAAAHAAYAAgACAAYAAAAIAAYAAgADAAYAAAAJAAYAAgABAAAAAAAFAAYAAgAAAAYAAAA=")
+tile_map_data = PackedByteArray("AAACAAcAAgABAAAAAAADAAcAAgABAAAAAAAEAAcAAgABAAAAAAAFAAcAAgABAAEAAAABAAkAAgABAAIAAAABAAgAAgAAAAEAAAACAAgAAgABAAEAAAADAAgAAgABAAEAAAAEAAgAAgABAAEAAAAFAAgAAgABAAEAAAAFAAkAAgABAAIAAAAEAAkAAgABAAIAAAADAAkAAgABAAIAAAACAAkAAgABAAIAAAAGAAcAAgABAAEAAAAGAAgAAgABAAEAAAAGAAkAAgABAAIAAAAHAAcAAgABAAEAAAAIAAcAAgABAAEAAAAIAAgAAgABAAEAAAAHAAgAAgABAAEAAAAHAAkAAgABAAIAAAAIAAkAAgABAAIAAAAJAAcAAgABAAEAAAAJAAgAAgABAAEAAAAJAAkAAgABAAIAAAAKAAYAAgABAAEAAAAKAAcAAgABAAEAAAAKAAgAAgABAAEAAAAKAAkAAgABAAIAAAALAAUAAgACAAYAAAALAAYAAgABAAEAAAALAAcAAgABAAEAAAALAAgAAgABAAEAAAALAAkAAgABAAIAAAAMAAgAAgABAAEAAAAMAAcAAgABAAEAAAAMAAYAAgABAAEAAAAMAAUAAgADAAYAAAAMAAkAAgABAAIAAAANAAUAAgABAAEAAAANAAYAAgABAAEAAAANAAcAAgABAAEAAAANAAgAAgABAAEAAAANAAkAAgABAAIAAAAKAAUAAgABAAYAAAAGAAYAAgABAAYAAAAHAAYAAgACAAYAAAAIAAYAAgADAAYAAAAJAAYAAgABAAEAAAAFAAYAAgAAAAYAAAAOAAUAAgABAAEAAAAPAAUAAgABAAEAAAAOAAYAAgABAAEAAAAPAAYAAgABAAEAAAAOAAkAAgABAAIAAAAPAAkAAgABAAIAAAAPAAgAAgABAAEAAAAPAAcAAgABAAEAAAAOAAgAAgABAAEAAAAOAAcAAgABAAEAAAAJAAUAAgAAAAYAAAANAAQAAgAAAAYAAAAOAAQAAgABAAYAAAAPAAQAAgACAAYAAAAQAAQAAgADAAYAAAATAAQAAgABAAAAAAAUAAQAAgACAAAAAAASAAQAAgABAAAAAAARAAQAAgABAAAAAAAQAAUAAgABAAEAAAAQAAYAAgABAAEAAAAQAAcAAgABAAEAAAAQAAgAAgABAAEAAAAQAAkAAgABAAEAAAARAAkAAgABAAEAAAARAAgAAgABAAEAAAASAAgAAgABAAEAAAARAAcAAgABAAEAAAATAAgAAgABAAEAAAATAAcAAgABAAEAAAATAAYAAgABAAEAAAAUAAYAAgABAAEAAAAUAAUAAgABAAEAAAATAAUAAgABAAEAAAASAAUAAgABAAEAAAARAAUAAgABAAEAAAARAAYAAgABAAEAAAASAAcAAgABAAEAAAASAAYAAgABAAEAAAASAAkAAgABAAEAAAATAAkAAgABAAEAAAAUAAgAAgABAAEAAAAUAAcAAgABAAEAAAAUAAkAAgABAAEAAAABAAcAAgABAAAAAAD+/wcAAgABAAYAAAD//wcAAgACAAYAAAAAAAcAAgADAAYAAAD9/wcAAgAAAAYAAAD8/wgAAgADAAYAAAD8/wkAAgABAAEAAAD7/wgAAgACAAYAAAD6/wgAAgABAAYAAAD5/wgAAgAAAAYAAAD3/wkAAgACAAYAAAD4/wkAAgADAAYAAAD2/wkAAgABAAYAAAD1/wkAAgAAAAYAAADx/woAAgABAAAAAADy/woAAgABAAAAAADz/woAAgABAAAAAAD0/woAAgABAAAAAAD1/woAAgABAAEAAAD2/woAAgABAAEAAAD3/woAAgABAAEAAAD4/woAAgABAAEAAAD5/woAAgABAAEAAAD6/woAAgABAAEAAAD7/woAAgABAAEAAAD8/woAAgABAAEAAAD9/woAAgABAAEAAAD+/woAAgABAAEAAAD//woAAgABAAEAAAAAAAoAAgABAAEAAAD9/wgAAgABAAEAAAD9/wkAAgABAAEAAAD+/wgAAgABAAEAAAD+/wkAAgABAAEAAAD//wgAAgABAAEAAAD//wkAAgABAAEAAAAAAAgAAgABAAEAAAAAAAkAAgABAAEAAAD5/wkAAgABAAEAAAD6/wkAAgABAAEAAAD7/wkAAgABAAEAAAA=")
 tile_set = SubResource("TileSet_ymm4q")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
 
 [node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("1_ethko")]
 z_index = 1
@@ -69,7 +78,7 @@ dung_ball = NodePath("../Dung Ball")
 position = Vector2(458, 715)
 
 [node name="Flag" type="Sprite2D" parent="."]
-position = Vector2(1296, 504)
+position = Vector2(2136, 368)
 scale = Vector2(7, 7)
 texture = ExtResource("6_my0og")
 
@@ -117,13 +126,67 @@ text = "¡Felicidades!
 Completaste el nivel"
 
 [node name="VictoryArea" type="Area2D" parent="."]
-position = Vector2(1275, 507)
+position = Vector2(2115, 361)
 scale = Vector2(7, 7)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VictoryArea"]
-position = Vector2(1.14285, -0.428574)
+position = Vector2(0.857127, 1.57143)
 shape = SubResource("RectangleShape2D_axlr7")
 
+[node name="Camera" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Camera"]
+position = Vector2(3.05176e-05, 6.10352e-05)
+scale = Vector2(1, 1)
+anchor_mode = 0
+
+[node name="Left" type="Area2D" parent="Camera"]
+position = Vector2(3.05176e-05, 6.10352e-05)
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/Left"]
+position = Vector2(-22, 537)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2uya8")
+
+[node name="Rigth" type="Area2D" parent="Camera"]
+position = Vector2(3.05176e-05, 6.10352e-05)
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/Rigth"]
+position = Vector2(1942.75, 541.5)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_tkthp")
+
+[node name="Up" type="Area2D" parent="Camera"]
+position = Vector2(6.10352e-05, 0.00012207)
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/Up"]
+position = Vector2(958.25, -13.0001)
+shape = SubResource("RectangleShape2D_cfs41")
+
+[node name="Down" type="Area2D" parent="Camera"]
+position = Vector2(9.15527e-05, 0.000183105)
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera/Down"]
+position = Vector2(960, 1088)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_rxqvk")
+
 [connection signal="body_entered" from="VictoryArea" to="." method="_on_victory_area_body_entered"]
+[connection signal="body_entered" from="Camera/Left" to="." method="_on_left_body_entered"]
+[connection signal="body_entered" from="Camera/Rigth" to="." method="_on_rigth_body_entered"]
+[connection signal="body_entered" from="Camera/Up" to="." method="_on_up_body_entered"]
+[connection signal="body_entered" from="Camera/Down" to="." method="_on_down_body_entered"]

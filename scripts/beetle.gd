@@ -213,3 +213,7 @@ func _on_over_state_exited() -> void:
 	push_force = BASE_PUSH_FORCE
 	#collision_shape_2d.shape.size.x = 6
 	over_dung = false
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
