@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 
 # To manage the size and weight of the dung ball
 func dung_size(n: int):
-	mass = n
+	mass += n
 	sprite_2d.frame = n
 	collision_shape_2d.shape.radius = 5 + n
 	dung_n += 1
