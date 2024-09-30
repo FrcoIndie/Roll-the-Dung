@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bd5ox58oqpjdp" path="res://assets/art/Flag.png" id="6_my0og"]
 [ext_resource type="Texture2D" uid="uid://og76xb3bvr15" path="res://assets/art/iu/WASD.png" id="7_0icwv"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hudrl"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m03y6"]
 texture = ExtResource("5_syux2")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, 8, -8, 8, 8, -8, 8)
@@ -35,7 +35,7 @@ texture = ExtResource("5_syux2")
 [sub_resource type="TileSet" id="TileSet_ymm4q"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 15
-sources/2 = SubResource("TileSetAtlasSource_hudrl")
+sources/2 = SubResource("TileSetAtlasSource_m03y6")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axlr7"]
 size = Vector2(11.7143, 16)
@@ -53,7 +53,6 @@ tile_set = SubResource("TileSet_ymm4q")
 anchor_mode = 0
 
 [node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("1_ethko")]
-z_index = 1
 position = Vector2(328, 728)
 dung_ball = NodePath("../Dung Ball")
 

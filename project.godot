@@ -58,7 +58,9 @@ restart={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Beetle"
-2d_physics/layer_3="Dung"
+2d_physics/layer_3="Dung Ball"
+2d_physics/layer_4="Dung"
+2d_physics/layer_5="Obstacles"
 
 [rendering]
 
