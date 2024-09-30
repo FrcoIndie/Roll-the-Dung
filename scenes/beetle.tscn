@@ -317,7 +317,7 @@ movement_component = NodePath("MovementComponent")
 animation_component = NodePath("AnimationComponent")
 forces_component = NodePath("ForcesComponent")
 deform_component = NodePath("DeformComponent")
-BASE_PUSH_FORCE = 50.0
+BASE_PUSH_FORCE = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")

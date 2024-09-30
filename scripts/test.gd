@@ -15,8 +15,7 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 
 
-func _on_victory_area_body_entered(body: Node2D) -> void:
-	print("a")
+func _on_victory_area_body_entered(body: CharacterBody2D) -> void:
 	label_4.visible = true
 
 

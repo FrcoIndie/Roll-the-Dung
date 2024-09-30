@@ -83,8 +83,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xpx7x"]
-radius = 45.0111
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4eyn"]
+size = Vector2(105, 91)
 
 [node name="OA1 Lion" type="Node2D"]
 z_index = -2
@@ -103,7 +103,7 @@ autoplay = "wait"
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 5.0
+wait_time = 6.5
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -112,7 +112,8 @@ collision_layer = 16
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_xpx7x")
+position = Vector2(-55.5, 13.5)
+shape = SubResource("RectangleShape2D_r4eyn")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_obstacle_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

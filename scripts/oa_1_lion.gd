@@ -7,7 +7,7 @@ extends Node2D
 @export_subgroup("Bodies")
 @export var beetle: CharacterBody2D
 @export var dung_ball: RigidBody2D
-@export var BASE_FORCE_VECTOR: Vector2 = Vector2(0.0, -50.0)
+@export var BASE_FORCE_VECTOR: Vector2 = Vector2(10.0, 25.0)
 
 var in_area: bool = false
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if animated_sprite_2d.animation == "move":
 		if in_area && animated_sprite_2d.frame < 3:
-			dung_ball.linear_velocity.y -= 25
+			dung_ball.linear_velocity -= BASE_FORCE_VECTOR
 
 
 func _on_timer_timeout() -> void:
