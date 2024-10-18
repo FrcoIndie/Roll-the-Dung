@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Beetle
 
 # --- Variables ---
 @onready var state_chart: StateChart = $StateChart
@@ -29,28 +30,43 @@ var near_dung: int = 0 # The beetle is standing besides the dung when != 0, -1: 
 var dung_position: int = near_dung # To keep track if the dung is at the left or at the right of the beetle
 var push_force: float = BASE_PUSH_FORCE
 var throwed: bool = true
-
+var frame_counter: int = 0
+var climbed: bool = false
+var inter: bool = false
 
 # --- Functions ---
+
+func _ready():
+	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
+
 # Process
 func _physics_process(delta: float) -> void:
 	# Components
+	if climbed and !ray_cast_2d_dung.is_colliding():
+		inter = true
+		climbed = false
+	if inter:
+		if frame_counter <= 30:
+			dung_ball.FREEZE_MODE_KINEMATIC == 1
+			frame_counter += 1
+		else:
+			dung_ball.FREEZE_MODE_KINEMATIC == 0
+			frame_counter = 0
+			inter = false
+
 	direction = input_component.direction
 	gravity_component.handle_gravity(self, delta)
-	forces_component.beetle_forces(self, push_force)
 	
 	dung_detection()
+	
 	velocity.x = clamp(velocity.x, -movement_component.max_speed, movement_component.max_speed)
 	
 	state_chart.set_expression_property("throwed", throwed)
 	state_chart.set_expression_property("over_dung", over_dung)
-	# Detect descend from the dung
-	if (!is_on_floor() and near_dung != 0):
-		dung_ball.linear_velocity = Vector2.ZERO
-		dung_ball.angular_velocity = 0
-	
+
 	# BeetleMovement States' Transitions
 	if is_on_floor():
+		forces_component.beetle_forces(self, push_force)
 		if Input.is_action_just_released("bend"):
 			state_chart.send_event("bend_to_throw")
 		if Input.is_action_pressed("bend"):
@@ -60,6 +76,7 @@ func _physics_process(delta: float) -> void:
 				state_chart.send_event("to_rest")
 			elif near_dung != 0 and Input.is_action_pressed("climb"):
 				state_chart.send_event("start_climbing")
+				climbed = true
 			elif direction != 0:
 				state_chart.send_event("start_walking")
 				if sign(near_dung) == sign(direction):
@@ -68,7 +85,6 @@ func _physics_process(delta: float) -> void:
 		state_chart.send_event("start_falling")
 	
 	move_and_slide()
-
 
 # Dung Detection
 func dung_detection():
@@ -93,8 +109,7 @@ func dung_detection():
 	else:
 		state_chart.send_event("moving_away_from_dung")
 		near_dung = 0
-
-
+	
 # --- FSM ---
 # 1. BeetleMovement States
 # 1.1. Idle State
@@ -102,18 +117,15 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "decel", direction, delta)
 	animation_component.animate(self, "idle", direction)
 
-
 # 1.2. Walk State
 func _on_walk_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "accel", direction, delta)
 	animation_component.animate(self, "walk", direction)
 
-
 # 1.3. Hold State
 func _on_dung_idle_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "decel", direction, delta)
 	animation_component.animate(self, "hold", near_dung)
-
 
 # 1.4. Dung State
 func _on_dung_state_physics_processing(delta: float) -> void:
@@ -122,8 +134,7 @@ func _on_dung_state_physics_processing(delta: float) -> void:
 	push_force = BASE_PUSH_FORCE
 	if direction != near_dung:
 		state_chart.send_event("stop_pushing")
-
-
+		
 # 1.5. Bend State
 func _on_bend_state_entered() -> void:
 	throwed = false
@@ -137,7 +148,6 @@ func _on_bend_state_physics_processing(delta: float) -> void:
 func _on_bend_state_exited() -> void:
 	set_collision_mask_value(3, true)
 	deform_component.change_collision_shape(collision_shape_2d)
-
 
 # 1.6. Throw State
 func _on_throw_state_entered() -> void:
@@ -154,7 +164,6 @@ func _on_throw_state_exited() -> void:
 func _on_timer_timeout() -> void:
 	throwed = true
 
-
 # 1.7. Climb State
 func _on_climb_state_entered() -> void:
 	animation_component.animate(self, "climb", direction)
@@ -167,7 +176,7 @@ func _on_climb_state_physics_processing(delta: float) -> void:
 	collision_shape_2d.disabled = true
 	gravity_component.gravity = 0.0
 	
-	var c = collision_shape_2d.shape.size.x/2 * scale.x
+	var c = collision_shape_2d.shape.height/2 * scale.x
 	var x = dung_position * (dung_ball.collision_shape_2d.shape.radius) * scale.x
 	var y = (dung_ball.collision_shape_2d.shape.radius) * scale.x
 	match animated_sprite_2d.frame:
@@ -193,12 +202,10 @@ func _on_climb_state_physics_processing(delta: float) -> void:
 		collision_shape_2d.disabled = false
 		gravity_component.gravity = 600.0
 
-
 # 1.7. Fall State
 func _on_fall_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "fall", direction, delta)
 	animation_component.animate(self, "fall", direction)
-
 
 # 2. RelativeToDung States
 # 2.1. Far State
@@ -218,3 +225,7 @@ func _on_over_state_exited() -> void:
 	push_force = BASE_PUSH_FORCE
 	#collision_shape_2d.shape.size.x = 6
 	over_dung = false
+
+func _on_spawn(position: Vector2, direction: String):
+	global_position = position
+	

@@ -1,0 +1,150 @@
+[gd_scene load_steps=12 format=4 uid="uid://wfvkmo7w4wq0"]
+
+[ext_resource type="Script" path="res://scripts/test.gd" id="1_5786y"]
+[ext_resource type="Texture2D" uid="uid://bgi1ll7di614t" path="res://assets/tilesets/Tileset.png" id="2_u8act"]
+[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_nvlqe"]
+[ext_resource type="PackedScene" uid="uid://c6vt2c5xe50k1" path="res://scenes/dung.tscn" id="4_wvh1y"]
+[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="5_x2ryx"]
+[ext_resource type="Texture2D" uid="uid://bd5ox58oqpjdp" path="res://assets/art/Flag.png" id="6_v0lym"]
+[ext_resource type="Texture2D" uid="uid://og76xb3bvr15" path="res://assets/art/iu/WASD.png" id="7_rhsw7"]
+[ext_resource type="PackedScene" uid="uid://cvu3ghniq514s" path="res://scenes/door_test.tscn" id="8_lbr0q"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hudrl"]
+texture = ExtResource("2_u8act")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -6, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:4/0 = 0
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 4, 8, 8, -8, 8)
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 0, 8, 8, -8, 8, -8, 4)
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, 8, -4, 8, 8, -8, 8)
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ymm4q"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 15
+sources/2 = SubResource("TileSetAtlasSource_hudrl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axlr7"]
+size = Vector2(11.7143, 16)
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_5786y")
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="Door_R" parent="Doors" instance=ExtResource("8_lbr0q")]
+destination_level_tag = "prev"
+destination_door_tag = "L"
+spawn_direction = "left"
+
+[node name="CollisionShape2D" parent="Doors/Door_R" index="0"]
+position = Vector2(995, 587)
+
+[node name="Spawn" parent="Doors/Door_R" index="1"]
+position = Vector2(1187, 534)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+scale = Vector2(7, 7)
+tile_map_data = PackedByteArray("AAACAAcAAgABAAAAAAADAAcAAgABAAAAAAAEAAcAAgABAAAAAAAFAAcAAgABAAEAAAABAAkAAgAAAAEAAAABAAgAAgAAAAEAAAACAAgAAgABAAEAAAADAAgAAgABAAEAAAAEAAgAAgABAAEAAAAFAAgAAgABAAEAAAAFAAkAAgABAAEAAAAEAAkAAgABAAEAAAADAAkAAgABAAEAAAACAAkAAgABAAEAAAAGAAcAAgABAAEAAAAGAAgAAgABAAEAAAAGAAkAAgABAAEAAAAHAAcAAgABAAEAAAAIAAcAAgABAAEAAAAIAAgAAgABAAEAAAAHAAgAAgABAAEAAAAHAAkAAgABAAEAAAAIAAkAAgABAAEAAAAJAAcAAgABAAEAAAAJAAgAAgABAAEAAAAJAAkAAgABAAEAAAAKAAYAAgABAAEAAAAKAAcAAgABAAEAAAAKAAgAAgABAAEAAAAKAAkAAgABAAEAAAALAAUAAgABAAAAAAALAAYAAgABAAEAAAALAAcAAgABAAEAAAALAAgAAgABAAEAAAALAAkAAgABAAEAAAAMAAgAAgABAAEAAAAMAAcAAgABAAEAAAAMAAYAAgABAAEAAAAMAAUAAgABAAAAAAAMAAkAAgABAAEAAAANAAUAAgACAAAAAAANAAYAAgACAAEAAAANAAcAAgACAAEAAAANAAgAAgACAAEAAAANAAkAAgACAAEAAAABAAcAAgAAAAAAAAAKAAUAAgAAAAAAAAAGAAYAAgABAAYAAAAHAAYAAgACAAYAAAAIAAYAAgADAAYAAAAJAAYAAgABAAAAAAAFAAYAAgAAAAYAAAA=")
+tile_set = SubResource("TileSet_ymm4q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_nvlqe")]
+z_index = 1
+position = Vector2(328, 728)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("4_wvh1y")]
+position = Vector2(214, 770)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung2" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("4_wvh1y")]
+position = Vector2(714, 728)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung Ball" parent="." instance=ExtResource("5_x2ryx")]
+position = Vector2(458, 715)
+
+[node name="Flag" type="Sprite2D" parent="."]
+position = Vector2(1296, 504)
+scale = Vector2(7, 7)
+texture = ExtResource("6_v0lym")
+
+[node name="WASD" type="Sprite2D" parent="."]
+position = Vector2(387, 222)
+scale = Vector2(7, 7)
+texture = ExtResource("7_rhsw7")
+
+[node name="WASD2" type="Sprite2D" parent="."]
+position = Vector2(980, 227)
+scale = Vector2(25.5312, 7.3125)
+texture = ExtResource("7_rhsw7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 45.0
+offset_top = 49.0
+offset_right = 440.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 50
+text = "Subirse a la bola"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 186.0
+offset_top = 325.0
+offset_right = 581.0
+offset_bottom = 394.0
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 50
+text = "Movimiento"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 620.0
+offset_top = 124.0
+offset_right = 1015.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 50
+text = "Reiniciar nivel"
+
+[node name="Label4" type="Label" parent="."]
+visible = false
+offset_left = 1356.0
+offset_top = 398.0
+offset_right = 1845.0
+offset_bottom = 539.0
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 50
+text = "¡Felicidades!
+Completaste el nivel"
+
+[node name="VictoryArea" type="Area2D" parent="."]
+position = Vector2(1275, 507)
+scale = Vector2(7, 7)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VictoryArea"]
+position = Vector2(1.14285, -0.428574)
+shape = SubResource("RectangleShape2D_axlr7")
+
+[connection signal="body_entered" from="VictoryArea" to="." method="_on_victory_area_body_entered"]
+
+[editable path="Doors/Door_R"]

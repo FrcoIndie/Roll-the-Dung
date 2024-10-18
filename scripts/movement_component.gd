@@ -1,7 +1,6 @@
 class_name MovementComponent
 extends Node2D
 
-
 @export_subgroup("Settings")
 @export var max_speed: float = 250.0
 @export var accel: float = 20.0
@@ -14,7 +13,6 @@ const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 32.0
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-
 
 func beetle_movement(body: CharacterBody2D, method: String, direction: float, delta: float) -> void:
 	var speed: float = 0.0

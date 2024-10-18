@@ -277,8 +277,9 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_axas7"]
-size = Vector2(6, 6)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpscc"]
+radius = 3.14285
+height = 6.28571
 
 [sub_resource type="Resource" id="Resource_s2tqw"]
 script = ExtResource("8_2fcgt")
@@ -306,7 +307,7 @@ expression = "over_dung == true"
 
 [node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component", "deform_component")]
 scale = Vector2(7, 7)
-collision_layer = 2
+collision_layer = 130
 collision_mask = 23
 floor_constant_speed = true
 script = ExtResource("1_ycl0j")
@@ -324,7 +325,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_axas7")
+shape = SubResource("CapsuleShape2D_vpscc")
 
 [node name="CollisionPolygon2DBend" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(8, 3, -7, 3, -4, 1, 0, 0, 5, 1)
