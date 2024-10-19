@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmb11up37s8oj"]
+
+[ext_resource type="Script" path="res://scripts/oa_2_elephant.gd" id="1_dshf6"]
+[ext_resource type="Texture2D" uid="uid://b1n3hv8vdhel3" path="res://assets/art/obstacles/OA2 Elephant-Sheet.png" id="1_twl7a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_os1ax"]
+atlas = ExtResource("1_twl7a")
+region = Rect2(0, 0, 192, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8ujg"]
+atlas = ExtResource("1_twl7a")
+region = Rect2(192, 0, 192, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vmp2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_os1ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8ujg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="OA2 Elephant" type="Node2D"]
+script = ExtResource("1_dshf6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_vmp2o")
+autoplay = "default"
+frame_progress = 0.876457

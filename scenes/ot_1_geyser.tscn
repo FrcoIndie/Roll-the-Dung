@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://co6v1q5ws04xl"]
+
+[ext_resource type="Texture2D" uid="uid://eqn13aevs57i" path="res://assets/art/obstacles/OT1 Geyser-Sheet.png" id="1_ociqa"]
+[ext_resource type="Script" path="res://scripts/ot_1_geyser.gd" id="1_swq1s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8fa2"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qlqy"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(32, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac1qi"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ojpw"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu1r2"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(128, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be7dc"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(160, 0, 32, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ie23j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8fa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qlqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac1qi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ojpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu1r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be7dc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8fa2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fiina"]
+size = Vector2(154, 77)
+
+[node name="OT1 Geyser" type="Node2D"]
+script = ExtResource("1_swq1s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_ie23j")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 279)
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_fiina")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
