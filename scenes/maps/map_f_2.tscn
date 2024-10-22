@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=4 uid="uid://bx273pre64fmh"]
+
+[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemap_sabana.tscn" id="1_qrc0m"]
+[ext_resource type="PackedScene" uid="uid://cobu5jfv0pfxy" path="res://scenes/oa_1_lion.tscn" id="2_y7qle"]
+[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_t7sll"]
+[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_52fnq"]
+
+[node name="Map F2" type="Node2D"]
+
+[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_t7sll")]
+position = Vector2(1656, 581)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung Ball" parent="." instance=ExtResource("4_52fnq")]
+position = Vector2(1472, 635)
+
+[node name="Sabana" parent="." instance=ExtResource("1_qrc0m")]
+tile_map_data = PackedByteArray("AAAEAAgAAAACAAIAAAAFAAgAAAACAAIAAAAGAAgAAAACAAIAAAAHAAgAAAACAAIAAAAJAAgAAAACAAIAAAAKAAgAAAACAAIAAAALAAgAAAACAAIAAAAIAAgAAAACAAIAAAAMAAgAAAACAAIAAAANAAgAAAACAAIAAAAOAAgAAAACAAIAAAAPAAgAAAACAAIAAAAQAAgAAAADAAIAAAAHAAcAAAACAAEAAAAIAAYAAAAEAAwAAAAIAAcAAAAEAA0AAAAJAAYAAAAFAAwAAAAJAAcAAAAFAA0AAAAKAAYAAAAGAAwAAAAKAAcAAAAGAA0AAAALAAcAAAACAAIAAAAMAAcAAAACAAIAAAANAAcAAAACAAIAAAAOAAcAAAACAAIAAAALAAYAAAADAA0AAAAMAAYAAAACAAEAAAANAAYAAAACAAEAAAAOAAYAAAACAAEAAAAPAAYAAAAGAAEAAAAPAAcAAAACAAIAAAAQAAYAAAAHAAEAAAAQAAcAAAAHAAIAAAAFAAYAAAACAAYAAAAFAAcAAAACAAIAAAAGAAYAAAACAAUAAAAGAAcAAAACAAYAAAADAAgAAAACAAIAAAACAAcAAAAGAAYAAAABAAcAAAACAAEAAAAAAAcAAAACAAEAAAACAAgAAAACAAIAAAABAAgAAAACAAIAAAAAAAgAAAACAAIAAAAEAAcAAAACAAIAAAADAAcAAAAHAAYAAAACAAYAAAAGAAUAAAAEAAUAAAABAAUAAAAEAAYAAAABAAYAAAAFAAUAAAACAAUAAAADAAYAAAAHAAUAAAA=")
+
+[node name="OA1 Lion" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("2_y7qle")]
+z_index = -1
+position = Vector2(1344, 672)
+beetle = NodePath("../Beetle")
+dung_ball = NodePath("../Dung Ball")
