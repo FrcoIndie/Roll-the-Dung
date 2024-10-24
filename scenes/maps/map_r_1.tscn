@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://dfvg83bjkocpw"]
 
-[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemap_sabana.tscn" id="1_bqbcr"]
+[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemap_savannah.tscn" id="1_bqbcr"]
 [ext_resource type="Texture2D" uid="uid://desw86klm0dk1" path="res://assets/tilesets/Tileset_agua.png" id="2_1jbwd"]
 [ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="3_0k2nk"]
 [ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="4_h6ir1"]
