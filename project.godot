@@ -26,6 +26,11 @@ window/stretch/aspect="ignore"
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
+[global_group]
+
+Ground=""
+"Dung Balls"=""
+
 [input]
 
 move_right={

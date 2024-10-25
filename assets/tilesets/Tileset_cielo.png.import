@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw7retw4bynry"
-path="res://.godot/imported/Lion-Sheet.png-962f2f4bacab7933a49ecb53dfb59ddb.ctex"
+uid="uid://d0v0ivptu27e8"
+path="res://.godot/imported/Tileset_cielo.png-4c2bb9806708031423dd301b2a017983.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/map/Lion-Sheet.png"
-dest_files=["res://.godot/imported/Lion-Sheet.png-962f2f4bacab7933a49ecb53dfb59ddb.ctex"]
+source_file="res://assets/tilesets/Tileset_cielo.png"
+dest_files=["res://.godot/imported/Tileset_cielo.png-4c2bb9806708031423dd301b2a017983.ctex"]
 
 [params]
 

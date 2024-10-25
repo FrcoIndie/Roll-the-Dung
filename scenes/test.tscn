@@ -129,7 +129,6 @@ texture = ExtResource("6_my0og")
 
 [node name="VictoryArea" type="Area2D" parent="Flag"]
 position = Vector2(-2.42856, -4.42857)
-scale = Vector2(1, 1)
 collision_layer = 0
 collision_mask = 2
 

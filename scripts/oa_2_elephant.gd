@@ -39,6 +39,6 @@ func handle_distance() -> void:
 
 func walk() -> void:
 	position -= MOV_VEL
-	if previous_frame == 0 && current_frame == 1:
+	if previous_frame == 0 && current_frame == 1 && dung_ball.on_ground:
 		dung_ball.linear_velocity -= BASE_FORCE_VECTOR
 	previous_frame = animated_sprite_2d.frame
