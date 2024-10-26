@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=48 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
 [ext_resource type="Texture2D" uid="uid://dcb6p02pcwpcm" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scripts/animation_component.gd" id="6_5pxr3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_ybrag"]
 [ext_resource type="Script" path="res://scripts/forces_component.gd" id="12_7yq2o"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_fxyhh"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lp0oi"]
 load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
@@ -304,7 +303,6 @@ autoplay = "idle"
 shape = SubResource("CircleShape2D_7vau2")
 
 [node name="Area" type="Area2D" parent="."]
-scale = Vector2(1, 1)
 collision_layer = 2
 collision_mask = 4
 
@@ -312,7 +310,6 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_2uf84")
 
 [node name="Dung RayCast" type="RayCast2D" parent="."]
-scale = Vector2(1, 1)
 target_position = Vector2(0, 7.57143)
 collision_mask = 4
 
@@ -458,14 +455,6 @@ script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
 event = &"to_idle"
 delay_in_seconds = "0.0"
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("12_fxyhh")]
-offset_left = -48.0
-offset_top = -56.0
-offset_right = 318.0
-offset_bottom = 112.0
-scale = Vector2(0.25, 0.25)
-initial_node_to_watch = NodePath("../StateChart")
 
 [node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_ur1ma")
