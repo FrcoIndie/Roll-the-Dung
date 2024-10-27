@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://owaus52wma32"]
+
+[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_45qhy"]
+[ext_resource type="PackedScene" uid="uid://dklcisk4nkuyq" path="res://scenes/tilemaps/sky.tscn" id="2_dinvn"]
+[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_656ha"]
+[ext_resource type="PackedScene" uid="uid://b8npdaq3t10jh" path="res://scenes/tilemaps/water.tscn" id="3_lwf6r"]
+[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_dhshu"]
+
+[node name="Map" type="Node2D"]
+
+[node name="Savannah" parent="." instance=ExtResource("1_45qhy")]
+
+[node name="Sky" parent="." instance=ExtResource("2_dinvn")]
+
+[node name="Water" parent="." instance=ExtResource("3_lwf6r")]
+
+[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_656ha")]
+position = Vector2(85, 866)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung Ball" parent="." instance=ExtResource("4_dhshu")]
+position = Vector2(222, 833)

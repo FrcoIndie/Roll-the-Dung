@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://blbwdr4fhusbx"]
+[gd_scene load_steps=7 format=4 uid="uid://bgft2dnucpnai"]
 
-[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemap_savannah.tscn" id="1_kag7u"]
+[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_kag7u"]
 [ext_resource type="Texture2D" uid="uid://desw86klm0dk1" path="res://assets/tilesets/Tileset_agua.png" id="2_bsvet"]
-[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="3_4ivbe"]
-[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="4_l5qun"]
-[ext_resource type="PackedScene" uid="uid://co6v1q5ws04xl" path="res://scenes/ot_1_geyser.tscn" id="5_n3qrx"]
-[ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/oa_2_elephant.tscn" id="6_7wljl"]
+[ext_resource type="PackedScene" uid="uid://co6v1q5ws04xl" path="res://scenes/obstacles/ot_1_geyser.tscn" id="5_n3qrx"]
+[ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/obstacles/oa_2_elephant.tscn" id="6_7wljl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4owjy"]
 texture = ExtResource("2_bsvet")
@@ -30,29 +28,22 @@ tile_map_data = PackedByteArray("AAAAAAcAAAACAAEAAAABAAcAAAABAAYAAAABAAYAAAABAAU
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_yjfqh")
 
-[node name="Dung Ball" parent="." instance=ExtResource("3_4ivbe")]
-position = Vector2(118, 696)
-
-[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("4_l5qun")]
-position = Vector2(9.00012, 708)
-dung_ball = NodePath("../Dung Ball")
-
 [node name="OT1 Geyser" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("5_n3qrx")]
 position = Vector2(490, 451)
-beetle = NodePath("../Beetle")
-dung_ball = NodePath("../Dung Ball")
+beetle = NodePath("")
+dung_ball = NodePath("")
 
 [node name="OT1 Geyser2" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("5_n3qrx")]
 position = Vector2(822, 453)
-beetle = NodePath("../Beetle")
-dung_ball = NodePath("../Dung Ball")
+beetle = NodePath("")
+dung_ball = NodePath("")
 
 [node name="OT1 Geyser3" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("5_n3qrx")]
 position = Vector2(1495, 443)
-beetle = NodePath("../Beetle")
-dung_ball = NodePath("../Dung Ball")
+beetle = NodePath("")
+dung_ball = NodePath("")
 
 [node name="OA2 Elephant" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_7wljl")]
-position = Vector2(1372, 318)
-beetle = NodePath("../Beetle")
-dung_ball = NodePath("../Dung Ball")
+position = Vector2(1549, 328)
+beetle = NodePath("")
+dung_ball = NodePath("")

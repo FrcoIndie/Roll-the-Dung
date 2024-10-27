@@ -1,38 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://drip44gw628ew"]
+[gd_scene load_steps=3 format=4 uid="uid://drip44gw628ew"]
 
-[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemap_savannah.tscn" id="1_b5csx"]
-[ext_resource type="Texture2D" uid="uid://desw86klm0dk1" path="res://assets/tilesets/Tileset_agua.png" id="2_2k8t0"]
-[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_fjqt4"]
-[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_6s2ql"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c20db"]
-texture = ExtResource("2_2k8t0")
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_5qerq"]
-sources/0 = SubResource("TileSetAtlasSource_c20db")
+[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_b5csx"]
+[ext_resource type="PackedScene" uid="uid://b8npdaq3t10jh" path="res://scenes/tilemaps/water.tscn" id="2_cnsqd"]
 
 [node name="Map F1" type="Node2D"]
 
 [node name="Savannah" parent="." instance=ExtResource("1_b5csx")]
-tile_map_data = PackedByteArray("AAAAAAcAAAACAAEAAAABAAcAAAACAAEAAAACAAcAAAAGAAEAAAADAAcAAAAFAAkAAAAIAAcAAAAFAAEAAAAJAAcAAAACAAEAAAAKAAcAAAACAAEAAAALAAcAAAACAAEAAAAMAAcAAAAEAA0AAAANAAYAAAAFAAwAAAANAAcAAAAFAA0AAAAOAAYAAAAGAAwAAAAOAAcAAAAGAA0AAAAPAAYAAAAHAAwAAAAPAAcAAAAHAA0AAAAQAAYAAAAIAAwAAAAQAAcAAAAIAA0AAAAEAAcAAAAGAAkAAAAFAAcAAAAHAAkAAAAAAAgAAAACAAIAAAABAAgAAAACAAIAAAACAAgAAAACAAIAAAADAAgAAAAFAAoAAAAEAAgAAAAGAAoAAAAFAAgAAAAHAAoAAAAGAAgAAAAGAAEAAAAHAAgAAAAGAAEAAAAIAAgAAAAKAAIAAAAJAAgAAAACAAIAAAAKAAgAAAACAAIAAAALAAgAAAACAAIAAAAMAAgAAAACAAIAAAANAAgAAAACAAIAAAAOAAgAAAACAAIAAAAPAAgAAAACAAIAAAAQAAgAAAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAAAAAcAAAACAAEAAAAAAAgAAAACAAIAAAABAAcAAAACAAEAAAABAAgAAAACAAIAAAACAAcAAAAGAAEAAAACAAgAAAACAAIAAAADAAcAAAAFAAkAAAADAAgAAAAFAAoAAAAEAAcAAAAGAAkAAAAEAAgAAAAGAAoAAAAFAAcAAAAHAAkAAAAFAAgAAAAHAAoAAAAGAAgAAAAGAAEAAAAHAAgAAAAGAAEAAAAIAAcAAAAFAAEAAAAIAAgAAAAKAAIAAAAJAAcAAAACAAEAAAAJAAgAAAACAAIAAAAKAAcAAAACAAEAAAAKAAgAAAACAAIAAAALAAcAAAACAAEAAAALAAgAAAACAAIAAAAMAAcAAAAEAA0AAAAMAAgAAAACAAIAAAANAAcAAAAFAA0AAAANAAgAAAACAAIAAAAOAAcAAAAGAA0AAAAOAAgAAAACAAIAAAAPAAcAAAAHAA0AAAAPAAgAAAACAAIAAAAQAAcAAAAIAA0AAAAQAAgAAAACAAIAAAAOAAYAAAAGAAwAAAAPAAYAAAAHAAwAAAANAAYAAAAFAAwAAAAQAAYAAAAIAAwAAAA=")
 
-[node name="Water (placeholder)" type="TileMapLayer" parent="."]
-scale = Vector2(7, 7)
-tile_map_data = PackedByteArray("AAAFAAcAAAACAAMAAAAGAAcAAAACAAMAAAAHAAcAAAACAAMAAAAEAAcAAAACAAMAAAADAAcAAAACAAMAAAA=")
-tile_set = SubResource("TileSet_5qerq")
-
-[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_fjqt4")]
-position = Vector2(101, 745)
-dung_ball = NodePath("../Dung Ball")
-
-[node name="Dung Ball" parent="." instance=ExtResource("4_6s2ql")]
-position = Vector2(278, 749)
+[node name="Water" parent="." instance=ExtResource("2_cnsqd")]
+tile_map_data = PackedByteArray("AAAIAAcAAAAYAAgAAAAIAAgAAAAYAAkAAAAHAAcAAAAXAAgAAAAHAAgAAAAXAAkAAAAGAAcAAAAWAAgAAAAGAAgAAAAWAAkAAAADAAcAAAASAAgAAAADAAgAAAASAAkAAAAEAAcAAAATAAgAAAAEAAgAAAATAAkAAAAFAAcAAAAUAAgAAAAFAAgAAAAUAAkAAAA=")
