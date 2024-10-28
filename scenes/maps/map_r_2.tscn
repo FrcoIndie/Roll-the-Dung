@@ -28,22 +28,14 @@ tile_map_data = PackedByteArray("AAAAAAcAAAACAAEAAAABAAcAAAABAAYAAAABAAYAAAABAAU
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_yjfqh")
 
-[node name="OT1 Geyser" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("5_n3qrx")]
+[node name="OT1 Geyser" parent="." instance=ExtResource("5_n3qrx")]
 position = Vector2(490, 451)
-beetle = NodePath("")
-dung_ball = NodePath("")
 
-[node name="OT1 Geyser2" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("5_n3qrx")]
+[node name="OT1 Geyser2" parent="." instance=ExtResource("5_n3qrx")]
 position = Vector2(822, 453)
-beetle = NodePath("")
-dung_ball = NodePath("")
 
-[node name="OT1 Geyser3" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("5_n3qrx")]
+[node name="OT1 Geyser3" parent="." instance=ExtResource("5_n3qrx")]
 position = Vector2(1495, 443)
-beetle = NodePath("")
-dung_ball = NodePath("")
 
-[node name="OA2 Elephant" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_7wljl")]
+[node name="OA2 Elephant" parent="." instance=ExtResource("6_7wljl")]
 position = Vector2(1549, 328)
-beetle = NodePath("")
-dung_ball = NodePath("")
