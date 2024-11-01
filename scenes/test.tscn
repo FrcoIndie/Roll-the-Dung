@@ -1,17 +1,14 @@
-[gd_scene load_steps=18 format=4 uid="uid://cupsl6j6up5m3"]
+[gd_scene load_steps=16 format=4 uid="uid://cupsl6j6up5m3"]
 
 [ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="1_ethko"]
 [ext_resource type="Script" path="res://scripts/test.gd" id="1_s8sya"]
-[ext_resource type="Texture2D" path="res://assets/tilesets/Tileset2.png" id="2_5gtew"]
 [ext_resource type="PackedScene" uid="uid://c6vt2c5xe50k1" path="res://scenes/dung.tscn" id="4_ucnpi"]
 [ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_uthbu"]
-[ext_resource type="Texture2D" path="res://assets/tilesets/Tileset.png" id="5_syux2"]
 [ext_resource type="Texture2D" uid="uid://bd5ox58oqpjdp" path="res://assets/art/Flag.png" id="6_my0og"]
 [ext_resource type="Texture2D" uid="uid://og76xb3bvr15" path="res://assets/art/iu/WASD.png" id="7_0icwv"]
 [ext_resource type="PackedScene" uid="uid://cobu5jfv0pfxy" path="res://scenes/obstacles/oa_1_lion.tscn" id="8_hbchk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_etsfe"]
-texture = ExtResource("2_5gtew")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -42,7 +39,6 @@ texture = ExtResource("2_5gtew")
 3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m03y6"]
-texture = ExtResource("5_syux2")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0

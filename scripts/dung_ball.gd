@@ -5,7 +5,7 @@ signal grow_dung_ball
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var hit_box: CollisionShape2D = $HitBox
-
+@onready var ground_box = $Area/GroundBox
 @export var dung_n: int = 0
 
 var on_ground: bool = false
@@ -25,6 +25,7 @@ func dung_size(n: int):
 	mass += n/2
 	sprite.frame = n
 	hit_box.shape.radius = 5 + n
+	ground_box.shape.radius = 6 + n
 	dung_n += 1
 
 

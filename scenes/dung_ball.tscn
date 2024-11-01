@@ -7,7 +7,7 @@
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3qkfi"]
-radius = 44.0454
+radius = 6.0
 
 [node name="Dung Ball" type="RigidBody2D" groups=["Dung Balls"]]
 z_index = 2
@@ -29,6 +29,7 @@ shape = SubResource("CircleShape2D_x6tyr")
 collision_layer = 4
 
 [node name="GroundBox" type="CollisionShape2D" parent="Area"]
+scale = Vector2(7, 7)
 shape = SubResource("CircleShape2D_3qkfi")
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
