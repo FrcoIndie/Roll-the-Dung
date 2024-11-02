@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 
 func eject() -> void:
 	if dung_close && animated_sprite_2d.frame == 3:
-		DUNG_FORCE_VECTOR.x = rng.randf_range(-5.0, 5.0) 
+		DUNG_FORCE_VECTOR.x = rng.randf_range(-5.0, 5.0)
 		dung_ball.linear_velocity -= DUNG_FORCE_VECTOR
 	if beetle_close && animated_sprite_2d.frame == 3:
 		BEETLE_FORCE_VECTOR.x = rng.randf_range(-5.0, 5.0) 

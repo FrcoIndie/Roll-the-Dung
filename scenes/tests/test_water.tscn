@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=4 uid="uid://dbtxrkutea2v7"]
+
+[ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_oaprv"]
+[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="2_5btxv"]
+[ext_resource type="PackedScene" uid="uid://b8npdaq3t10jh" path="res://scenes/tilemaps/water.tscn" id="2_exkga"]
+[ext_resource type="Script" path="res://scripts/water.gd" id="3_mepcl"]
+[ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="3_snu5l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0qth"]
+size = Vector2(896, 168)
+
+[node name="Test Water" type="Node2D"]
+
+[node name="Savannah" parent="." instance=ExtResource("1_oaprv")]
+tile_map_data = PackedByteArray("AAAAAAcAAAAGAAEAAAABAAcAAAAGAAEAAAACAAcAAAACAAEAAAADAAcAAAACAAEAAAAEAAcAAAAGAAEAAAAFAAcAAAAHAAEAAAAMAAcAAAAFAAEAAAANAAcAAAAGAAEAAAAOAAcAAAACAAEAAAAPAAcAAAACAAEAAAAQAAcAAAAGAAEAAAAFAAgAAAAJAAIAAAAMAAgAAAAKAAIAAAAGAAgAAAAGAAEAAAAHAAgAAAAGAAEAAAAIAAgAAAAGAAEAAAAJAAgAAAAGAAEAAAAKAAgAAAAGAAEAAAALAAgAAAAGAAEAAAAEAAgAAAAGAAIAAAADAAgAAAAGAAIAAAACAAgAAAAGAAIAAAABAAgAAAAGAAIAAAAAAAgAAAAGAAIAAAANAAgAAAAGAAIAAAAOAAgAAAAGAAIAAAAPAAgAAAAGAAIAAAAQAAgAAAAGAAIAAAA=")
+
+[node name="Water" parent="." instance=ExtResource("2_exkga")]
+tile_map_data = PackedByteArray("AAAHAAcAAAASAAEAAAAIAAcAAAATAAEAAAAJAAcAAAARAAEAAAAKAAcAAAASAAEAAAALAAcAAAATAAEAAAAGAAcAAAARAAEAAAAGAAgAAAARAAIAAAAHAAgAAAASAAIAAAAIAAgAAAATAAIAAAAJAAgAAAARAAIAAAAKAAgAAAASAAIAAAALAAgAAAATAAIAAAAMAAcAAAAUAAEAAAAFAAcAAAAQAAEAAAAFAAgAAAAQAAIAAAAMAAgAAAAUAAIAAAA=")
+
+[node name="AreaWater" type="Area2D" parent="." node_paths=PackedStringArray("dung_ball")]
+collision_layer = 32
+collision_mask = 39
+script = ExtResource("3_mepcl")
+dung_ball = NodePath("../Dung Ball")
+
+[node name="CollisionWater" type="CollisionShape2D" parent="AreaWater"]
+position = Vector2(1008, 924)
+shape = SubResource("RectangleShape2D_u0qth")
+
+[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("2_5btxv")]
+position = Vector2(396, 764)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung Ball" parent="." instance=ExtResource("3_snu5l")]
+position = Vector2(519, 735)
+
+[connection signal="body_entered" from="AreaWater" to="AreaWater" method="_on_body_entered"]
+[connection signal="body_exited" from="AreaWater" to="AreaWater" method="_on_body_exited"]

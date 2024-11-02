@@ -9,10 +9,10 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3qkfi"]
 radius = 6.0
 
-[node name="Dung Ball" type="RigidBody2D" groups=["Dung Balls"]]
+[node name="Dung Ball" type="RigidBody2D"]
 z_index = 2
 collision_layer = 4
-collision_mask = 31
+collision_mask = 63
 mass = 4.0
 script = ExtResource("1_3hgia")
 
@@ -25,7 +25,7 @@ hframes = 11
 scale = Vector2(7, 7)
 shape = SubResource("CircleShape2D_x6tyr")
 
-[node name="Area" type="Area2D" parent="."]
+[node name="Area" type="Area2D" parent="." groups=["Dung Ball"]]
 collision_layer = 4
 
 [node name="GroundBox" type="CollisionShape2D" parent="Area"]

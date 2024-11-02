@@ -29,6 +29,7 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 [global_group]
 
 Ground=""
+Water=""
 "Dung Balls"=""
 
 [input]
@@ -66,6 +67,7 @@ restart={
 2d_physics/layer_3="Dung Ball"
 2d_physics/layer_4="Dung"
 2d_physics/layer_5="Obstacles"
+2d_physics/layer_6="Water"
 
 [rendering]
 

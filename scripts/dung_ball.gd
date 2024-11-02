@@ -9,6 +9,7 @@ signal grow_dung_ball
 @export var dung_n: int = 0
 
 var on_ground: bool = false
+var on_water: bool = false
 
 
 # --- Functions ---
