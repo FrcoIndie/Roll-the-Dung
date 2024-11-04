@@ -5,7 +5,7 @@ extends Area2D
 
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
-@export var BASE_PUSH_VECTOR: Vector2 = Vector2(0.0, 0.1)
+@export var BASE_PUSH_VECTOR: Vector2 = Vector2(0.0, gravity).normalized()
 
 var water_top: float
 var ball_c: Vector2
@@ -27,13 +27,18 @@ func thrust_force(vol: float, prop: float) -> Vector2:
 	return thrust_force
 
 
+func friction_force(vol: float, prop: float) -> Vector2:
+	var friction_force = vol * prop * BASE_PUSH_VECTOR * 0.2
+	return friction_force
+
+
 func proportions(body: RigidBody2D) -> float:
 	ball_c = dung_ball.position
 	ball_r = dung_ball.hit_box.shape.radius
 	var a = ball_c.y - water_top
 	var b = ball_r - a
 	if b < 0:
-		return 2 * ball_r
+		return 1
 	else:
 		var prop = b / (2 * ball_r)
 		return prop
