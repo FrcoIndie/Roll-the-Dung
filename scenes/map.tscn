@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://owaus52wma32"]
+[gd_scene load_steps=21 format=4 uid="uid://owaus52wma32"]
 
 [ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_45qhy"]
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_v6iyk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dygaqd31wl3ow" path="res://assets/art/madriguera.png" id="6_5i544"]
 [ext_resource type="PackedScene" uid="uid://co6v1q5ws04xl" path="res://scenes/obstacles/ot_1_geyser.tscn" id="6_gl6q3"]
 [ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/obstacles/oa_2_elephant.tscn" id="9_eeixy"]
+[ext_resource type="Script" path="res://scripts/path_follow_2d.gd" id="11_3jxk2"]
 [ext_resource type="PackedScene" uid="uid://c6vt2c5xe50k1" path="res://scenes/dung.tscn" id="11_da55w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yekv"]
@@ -109,6 +110,12 @@ sources/0 = SubResource("TileSetAtlasSource_cu1no")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bp4kc"]
 size = Vector2(35.7143, 20)
 
+[sub_resource type="Curve2D" id="Curve2D_5ieam"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3505, 47, 0, 0, 0, 0, -6566, 874, 0, 0, 0, 0, 0, 0)
+}
+point_count = 4
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_cyv76"]
 radius = 265.424
 
@@ -153,23 +160,27 @@ position = Vector2(1717, 258)
 
 [node name="OT1 Geyser" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_gl6q3")]
 position = Vector2(726, 660)
-DUNG_FORCE_VECTOR = Vector2(0, 300)
-BEETLE_FORCE_VECTOR = Vector2(0, 150)
 beetle = NodePath("../Beetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="OT1 Geyser2" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_gl6q3")]
 position = Vector2(4719, -138)
-DUNG_FORCE_VECTOR = Vector2(0, 300)
-BEETLE_FORCE_VECTOR = Vector2(0, 150)
 beetle = NodePath("../Beetle")
 dung_ball = NodePath("../Dung Ball")
 
-[node name="OA2 Elephant" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("9_eeixy")]
-position = Vector2(7195, -322)
-MOV_VEL = Vector2(5, 0)
-beetle = NodePath("../Beetle")
-dung_ball = NodePath("../Dung Ball")
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(6950, -379)
+curve = SubResource("Curve2D_5ieam")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotation = 3.12818
+script = ExtResource("11_3jxk2")
+path_vel = 0.05
+
+[node name="OA2 Elephant" parent="Path2D/PathFollow2D" node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("9_eeixy")]
+rotation = -3.12818
+beetle = NodePath("../../../Beetle")
+dung_ball = NodePath("../../../Dung Ball")
 
 [node name="OA1 Lion" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("1_x1mtv")]
 z_index = -1

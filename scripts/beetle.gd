@@ -17,13 +17,14 @@ extends CharacterBody2D
 
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
-@export var BASE_PUSH_FORCE: float = 10.0
+
+const PUSH_FORCE: float = 0.25
 
 var direction: float = 0.0 # To track the input of the player
 var over_dung: bool = false # 
 var near_dung: bool = false # True if the dung ball is inside the dunbox
 var dung_position: int # To keep track if the dung is at the left or at the right of the beetle
-var push_force: float = BASE_PUSH_FORCE
+var push_force: float = PUSH_FORCE
 
 
 # --- Functions ---
@@ -52,11 +53,11 @@ func dung_detection():
 		over_dung = false
 
 func _on_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Dung Balls"):
+	if body.is_in_group("Dung Ball"):
 		near_dung = true
 
 func _on_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Dung Balls"):
+	if body.is_in_group("Dung Ball"):
 		near_dung = false
 
 
@@ -103,6 +104,7 @@ func _on_walk_state_exited() -> void:
 # 1.3 Hold State
 func _on_hold_state_entered() -> void:
 	animation_component.animate(self, "hold", dung_position)
+	forces_component.flag_forces = true
 
 func _on_dung_idle_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "decel", direction, delta)
@@ -119,12 +121,12 @@ func _on_dung_idle_state_physics_processing(delta: float) -> void:
 		state_chart.send_event("to_fall")
 
 func _on_hold_state_exited() -> void:
-	pass
+	forces_component.flag_forces = false
 
 
 # 1.4 Push State
 func _on_dung_state_entered() -> void:
-	push_force = BASE_PUSH_FORCE
+	forces_component.flag_forces = true
 
 func _on_dung_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "accel", direction, delta)
@@ -142,13 +144,13 @@ func _on_dung_state_physics_processing(delta: float) -> void:
 		state_chart.send_event("to_fall")
 
 func _on_dung_state_exited() -> void:
-	pass
+	forces_component.flag_forces = false
 
 
 # 1.5 Climb State
 func _on_climb_state_entered() -> void:
 	animation_component.animate(self, "climb", direction)
-	gravity_component.gravity = 0.0
+	gravity_component.flag_gravity = false
 	hit_box.disabled = true
 	#var tween := get_tree().create_tween()
 	#tween.tween_property(self, "position", Vector2(dung_ball.position.x - x - dung_position*c, dung_ball.position.y), 0.125*sqrt(dung_ball.dung_n))
@@ -182,7 +184,7 @@ func _on_climb_state_physics_processing(delta: float) -> void:
 		state_chart.send_event("to_idle")
 
 func _on_climb_state_exited() -> void:
-	gravity_component.gravity = 600.0
+	gravity_component.flag_gravity = true
 	hit_box.disabled = false
 
 
