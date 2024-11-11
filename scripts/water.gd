@@ -5,18 +5,18 @@ extends Area2D
 
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
-@export var BASE_PUSH_VECTOR: Vector2 = Vector2(0.0, 0.5)
+@export var BASE_PUSH_VECTOR: Vector2 = Vector2(0.0, 5.0)
 
-var water_top: float
-var ball_c: Vector2
-var ball_r: float
+var water_top: float # Position (px) of the top of the water
+var ball_c: Vector2 # Center of the dung_ball
+var ball_r: float # Radius of the dung ball
 
 
 func _ready() -> void:
 	water_top = collision_water.position.y - collision_water.shape.size.y/2
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var prop = proportions(dung_ball)
 	if dung_ball.on_water:
 		dung_ball.linear_velocity -= thrust_force(2 * ball_r, prop)
