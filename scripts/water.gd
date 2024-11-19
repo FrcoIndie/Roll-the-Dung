@@ -5,7 +5,9 @@ extends Area2D
 
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
-@export var BASE_PUSH_VECTOR: Vector2 = Vector2(0.0, 5.0)
+
+const THRUST_VECTOR: Vector2 = Vector2(0.0, 5.0)
+const FRICTION_COEF: float = 0.25
 
 var water_top: float # Position (px) of the top of the water
 var ball_c: Vector2 # Center of the dung_ball
@@ -19,11 +21,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var prop = proportions(dung_ball)
 	if dung_ball.on_water:
-		dung_ball.linear_velocity -= thrust_force(2 * ball_r, prop)
+		#dung_ball.linear_velocity -= thrust_force(2 * ball_r, prop)
+		var forces = -thrust_force(2 * ball_r, prop)
+		dung_ball.apply_force(lerp(forces, Vector2.ZERO, FRICTION_COEF), Vector2.ZERO)
 
 
 func thrust_force(vol: float, prop: float) -> Vector2:
-	var thrust_force = vol * prop * BASE_PUSH_VECTOR
+	var thrust_force = vol * prop * THRUST_VECTOR
 	return thrust_force
 
 

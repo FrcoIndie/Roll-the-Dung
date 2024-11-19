@@ -8,6 +8,8 @@ signal grow_dung_ball
 @onready var ground_box = $Area/GroundBox
 @export var dung_n: int = 0
 
+const MAX_ANG_VEL = 0.5
+
 var on_ground: bool = false
 var on_water: bool = false
 
@@ -17,8 +19,10 @@ func _ready() -> void:
 	dung_size(dung_n)
 
 
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	if on_water:
+		if abs(angular_velocity) > MAX_ANG_VEL:
+			angular_velocity = sign(angular_velocity) * MAX_ANG_VEL
 
 
 # To manage the size and weight of the dung ball

@@ -32,7 +32,7 @@ beetle = NodePath("../Beetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="OA2 Elephant" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("8_ogmb8")]
-position = Vector2(-2092, 403)
+position = Vector2(188, 290)
 beetle = NodePath("../Beetle")
 dung_ball = NodePath("../Dung Ball")
 
@@ -47,14 +47,15 @@ position = Vector2(1008, 924)
 shape = SubResource("RectangleShape2D_u0qth")
 
 [node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("2_5btxv")]
-position = Vector2(472, 730)
+position = Vector2(-171, 703)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Camera2D" type="Camera2D" parent="Beetle"]
 scale = Vector2(0.142857, 0.142857)
 
 [node name="Dung Ball" parent="." instance=ExtResource("3_snu5l")]
-position = Vector2(592, 730)
+position = Vector2(23, 702)
+dung_n = 5
 
 [connection signal="body_entered" from="AreaWater" to="AreaWater" method="_on_body_entered"]
 [connection signal="body_exited" from="AreaWater" to="AreaWater" method="_on_body_exited"]

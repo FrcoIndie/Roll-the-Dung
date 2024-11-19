@@ -1,7 +1,7 @@
 extends PathFollow2D
 
 
-@export var path_vel: float = 1.0
+@export var path_vel: float = 0.01
 
 
 func _process(delta: float) -> void:
