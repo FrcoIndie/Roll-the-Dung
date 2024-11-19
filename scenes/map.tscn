@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://owaus52wma32"]
+[gd_scene load_steps=21 format=4 uid="uid://owaus52wma32"]
 
 [ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_45qhy"]
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_v6iyk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dygaqd31wl3ow" path="res://assets/art/madriguera.png" id="6_5i544"]
 [ext_resource type="PackedScene" uid="uid://co6v1q5ws04xl" path="res://scenes/obstacles/ot_1_geyser.tscn" id="6_gl6q3"]
 [ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/obstacles/oa_2_elephant.tscn" id="9_eeixy"]
+[ext_resource type="Script" path="res://scripts/path_follow_2d.gd" id="10_tffad"]
 [ext_resource type="PackedScene" uid="uid://c6vt2c5xe50k1" path="res://scenes/dung.tscn" id="11_da55w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yekv"]
@@ -109,6 +110,8 @@ sources/0 = SubResource("TileSetAtlasSource_cu1no")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bp4kc"]
 size = Vector2(35.7143, 20)
 
+[sub_resource type="Curve2D" id="Curve2D_x6mah"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_cyv76"]
 radius = 265.424
 
@@ -161,10 +164,16 @@ position = Vector2(4719, -138)
 beetle = NodePath("../Beetle")
 dung_ball = NodePath("../Dung Ball")
 
-[node name="OA2 Elephant" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("9_eeixy")]
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_x6mah")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+script = ExtResource("10_tffad")
+
+[node name="OA2 Elephant" parent="Path2D/PathFollow2D" node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("9_eeixy")]
 position = Vector2(6678, -352)
-beetle = NodePath("../Beetle")
-dung_ball = NodePath("../Dung Ball")
+beetle = NodePath("../../../Beetle")
+dung_ball = NodePath("../../../Dung Ball")
 
 [node name="OA1 Lion" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("1_x1mtv")]
 z_index = -1
