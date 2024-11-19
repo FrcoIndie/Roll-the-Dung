@@ -5,8 +5,8 @@ extends Node2D
 
 const MIN_BEETLE_FORCE: Vector2 = Vector2(0.0, 300.0)
 const MAX_BEETLE_FORCE: Vector2 = Vector2(0.0, 600.0)
-const MIN_DUNG_FORCE: Vector2 = Vector2(0.0, 0.2)
-const MAX_DUNG_FORCE: Vector2 = Vector2(0.0, 0.6)
+const MIN_DUNG_FORCE: Vector2 = Vector2(0.0, 2.0)
+const MAX_DUNG_FORCE: Vector2 = Vector2(0.0, 5.0)
 
 @export var MAX_DISTANCE: float = 1000.0
 
