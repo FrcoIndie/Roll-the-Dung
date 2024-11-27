@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://owaus52wma32"]
+[gd_scene load_steps=22 format=4 uid="uid://owaus52wma32"]
 
 [ext_resource type="PackedScene" uid="uid://c4fknrarhbysy" path="res://scenes/tilemaps/savannah.tscn" id="1_45qhy"]
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_v6iyk"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_656ha"]
 [ext_resource type="PackedScene" uid="uid://b8npdaq3t10jh" path="res://scenes/tilemaps/water.tscn" id="3_lwf6r"]
 [ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_dhshu"]
+[ext_resource type="PackedScene" uid="uid://blrwrn2cwg8ip" path="res://scenes/obstacles/wind.tscn" id="6_4tvyl"]
 [ext_resource type="Texture2D" uid="uid://dygaqd31wl3ow" path="res://assets/art/madriguera.png" id="6_5i544"]
 [ext_resource type="PackedScene" uid="uid://co6v1q5ws04xl" path="res://scenes/obstacles/ot_1_geyser.tscn" id="6_gl6q3"]
 [ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/obstacles/oa_2_elephant.tscn" id="9_eeixy"]
@@ -116,6 +117,7 @@ size = Vector2(35.7143, 20)
 radius = 265.424
 
 [node name="Map" type="Node2D"]
+position = Vector2(135, 9)
 script = ExtResource("1_v6iyk")
 
 [node name="Sky" parent="." instance=ExtResource("2_dinvn")]
@@ -132,12 +134,18 @@ tile_map_data = PackedByteArray("AAAAAAgAAAACAAIAAAABAAgAAAACAAIAAAACAAgAAAACAAI
 
 [node name="Water" parent="." instance=ExtResource("3_lwf6r")]
 
+[node name="Wind" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_4tvyl")]
+position = Vector2(6213, -181)
+beetle = NodePath("../Beetle")
+dung_ball = NodePath("../Dung Ball")
+
 [node name="Burrow" type="TileMapLayer" parent="."]
 scale = Vector2(7, 7)
 tile_map_data = PackedByteArray("AAB9AP7/AAABAAAAAAB9AP//AAABAAEAAAB+AP7/AAACAAAAAAB+AP//AAACAAEAAAB/AP7/AAADAAAAAAB/AP//AAADAAEAAAA=")
 tile_set = SubResource("TileSet_wxc8m")
 
 [node name="Area2D" type="Area2D" parent="Burrow"]
+position = Vector2(-4.42857, -41)
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Burrow/Area2D"]
@@ -145,14 +153,14 @@ position = Vector2(2025.29, -20.5714)
 shape = SubResource("RectangleShape2D_bp4kc")
 
 [node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_656ha")]
-position = Vector2(5990, -83)
+position = Vector2(5667, -88)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Camera2D" type="Camera2D" parent="Beetle"]
 position = Vector2(50, -20)
 
 [node name="Dung Ball" parent="." instance=ExtResource("4_dhshu")]
-position = Vector2(6162, -80)
+position = Vector2(5841, -167)
 
 [node name="OT1 Geyser" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_gl6q3")]
 position = Vector2(726, 660)
@@ -168,10 +176,11 @@ dung_ball = NodePath("../Dung Ball")
 curve = SubResource("Curve2D_x6mah")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(21, -1730)
 script = ExtResource("10_tffad")
 
 [node name="OA2 Elephant" parent="Path2D/PathFollow2D" node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("9_eeixy")]
-position = Vector2(6678, -352)
+position = Vector2(2902, -412)
 beetle = NodePath("../../../Beetle")
 dung_ball = NodePath("../../../Dung Ball")
 
