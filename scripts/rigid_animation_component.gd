@@ -1,4 +1,4 @@
-class_name AnimationComponent
+class_name RigidAnimationComponent
 extends Node2D
 
 
@@ -16,6 +16,6 @@ func horizontal_flip(direction: float) -> void:
 		sprite.flip_h = true
 
 
-func animate(body: CharacterBody2D, animation : String, direction: float) -> void:
+func animate(animation: String, direction: float) -> void:
 	horizontal_flip(direction)
 	sprite.play(animation)
