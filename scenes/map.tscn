@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_656ha"]
 [ext_resource type="PackedScene" uid="uid://b8npdaq3t10jh" path="res://scenes/tilemaps/water.tscn" id="3_lwf6r"]
 [ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_dhshu"]
-[ext_resource type="PackedScene" uid="uid://blrwrn2cwg8ip" path="res://scenes/obstacles/wind.tscn" id="6_4tvyl"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/wind.tscn" id="6_4tvyl"]
 [ext_resource type="Texture2D" uid="uid://dygaqd31wl3ow" path="res://assets/art/madriguera.png" id="6_5i544"]
 [ext_resource type="PackedScene" uid="uid://co6v1q5ws04xl" path="res://scenes/obstacles/ot_1_geyser.tscn" id="6_gl6q3"]
 [ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/obstacles/oa_2_elephant.tscn" id="9_eeixy"]
