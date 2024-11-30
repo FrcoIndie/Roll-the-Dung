@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2gvip5nsgbs0"
+path="res://.godot/imported/steps 1.mp3-8c3f512f913720ef7b603bfb7532b35b.mp3str"
+
+[deps]
+
+source_file="res://audios/steps 1.mp3"
+dest_files=["res://.godot/imported/steps 1.mp3-8c3f512f913720ef7b603bfb7532b35b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

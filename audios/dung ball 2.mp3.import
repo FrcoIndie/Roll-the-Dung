@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bb2ijpn0o3lk7"
+path="res://.godot/imported/dung ball 2.mp3-9b85e798506ae39fe5298e007766cc8e.mp3str"
+
+[deps]
+
+source_file="res://audios/dung ball 2.mp3"
+dest_files=["res://.godot/imported/dung ball 2.mp3-9b85e798506ae39fe5298e007766cc8e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

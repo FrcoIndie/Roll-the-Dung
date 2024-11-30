@@ -2,6 +2,10 @@ extends Node2D
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var step_1 = $step_1
+@onready var step_2 = $step_2
+@onready var step_3 = $step_3
+@onready var step_4 = $step_4
 
 const MIN_BEETLE_FORCE: Vector2 = Vector2(0.0, 300.0)
 const MAX_BEETLE_FORCE: Vector2 = Vector2(0.0, 600.0)
@@ -18,7 +22,7 @@ var beetle_distance: float
 var dung_distance: float
 var previous_frame: int
 var current_frame: int
-
+var track: int = 1
 
 func _physics_process(delta: float) -> void:
 	beetle_distance = abs(position.x - beetle.position.x)
@@ -52,3 +56,17 @@ func walk(beetle_force_vector, dung_force_vector) -> void:
 		if dung_ball.on_ground:
 			dung_ball.apply_impulse(-dung_force_vector, Vector2.ZERO)
 	previous_frame = animated_sprite_2d.frame
+
+
+func _on_timer_timeout():
+	if track == 1:
+		step_1.play()
+	elif track == 1:
+		step_2.play()
+	elif track == 1:
+		step_3.play()
+	elif track == 1:
+		step_4.play()
+	track += 1
+	if track > 4:
+		track = 1

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://br15gpvbykfvm"
+path="res://.godot/imported/wind blow.mp3-0865d727df6b77d93a3b293d2394a875.mp3str"
+
+[deps]
+
+source_file="res://audios/wind blow.mp3"
+dest_files=["res://.godot/imported/wind blow.mp3-0865d727df6b77d93a3b293d2394a875.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

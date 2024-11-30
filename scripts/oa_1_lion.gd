@@ -3,6 +3,8 @@ extends Node2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var snore_1 = $snore1
+@onready var snore_2 = $snore2
 
 @export_subgroup("Forces")
 @export var BEETLE_FORCE_VECTOR: Vector2 = Vector2(15.0, 45.0)
@@ -14,6 +16,7 @@ extends Node2D
 
 var beetle_in_area: bool = false
 var dung_in_area: bool = false
+var time_to_snore: bool = false
 
 
 func _physics_process(delta: float) -> void:
@@ -46,3 +49,11 @@ func _on_area_2d_body_exited(body) -> void:
 		beetle_in_area = false
 	if body == dung_ball:
 		dung_in_area = false
+
+
+func _on_timer_2_timeout():
+	if time_to_snore:
+		snore_1.play()
+	else:
+		snore_2.play()
+	!time_to_snore

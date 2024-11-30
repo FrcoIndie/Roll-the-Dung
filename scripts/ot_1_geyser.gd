@@ -1,11 +1,11 @@
 extends Node2D
 
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export_subgroup("Forces")
 @export var BEETLE_FORCE_VECTOR: Vector2 = Vector2(0.0, 300.0)
 @export var DUNG_FORCE_VECTOR: Vector2 = Vector2(0.0, 2.5)
+@onready var sound = $sound
 
 @export_subgroup("Bodies")
 @export var beetle: CharacterBody2D
@@ -18,6 +18,8 @@ var force_x: float
 
 
 func _physics_process(delta: float) -> void:
+	if animated_sprite_2d.frame == 0:
+		sound.play()
 	if beetle_close && (animated_sprite_2d.frame >= 6 && animated_sprite_2d.frame <= 9):
 		BEETLE_FORCE_VECTOR.x += rng.randf_range(-5.0, 5.0)
 		beetle.velocity -= BEETLE_FORCE_VECTOR

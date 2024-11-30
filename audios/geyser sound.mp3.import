@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://igst77uyspc4"
+path="res://.godot/imported/geyser sound.mp3-142cb8bcc0b643ae38177ec4f1cd2ad5.mp3str"
+
+[deps]
+
+source_file="res://audios/geyser sound.mp3"
+dest_files=["res://.godot/imported/geyser sound.mp3-142cb8bcc0b643ae38177ec4f1cd2ad5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

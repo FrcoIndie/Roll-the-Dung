@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmalxjrhche05"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_b5dp6"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b5dp6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_top = 360.0
+offset_right = 1920.0
+offset_bottom = 654.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Jugar"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Salir"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 83.0
+offset_right = 1749.0
+offset_bottom = 356.0
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 200
+text = "ROLL THE DUNG"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 658.0
+offset_right = 1754.0
+offset_bottom = 931.0
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 50
+text = "Hecho por Franco Salgado.
+
+Todos los assets utilizados son originales."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

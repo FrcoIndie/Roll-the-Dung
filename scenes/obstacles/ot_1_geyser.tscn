@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://co6v1q5ws04xl"]
+[gd_scene load_steps=22 format=3 uid="uid://co6v1q5ws04xl"]
 
 [ext_resource type="Texture2D" uid="uid://7n8tfcx25hgv" path="res://assets/art/obstacles/OT1 Geyser-Sheet.png" id="1_ociqa"]
 [ext_resource type="Script" path="res://scripts/ot_1_geyser.gd" id="1_swq1s"]
+[ext_resource type="AudioStream" uid="uid://igst77uyspc4" path="res://audios/geyser sound.mp3" id="3_hy8ki"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wf1bo"]
 atlas = ExtResource("1_ociqa")
@@ -154,6 +155,10 @@ shape = SubResource("RectangleShape2D_d0ai1")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hy8ki")
+max_distance = 700.0
 
 [connection signal="body_entered" from="EjectArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="EjectArea" to="." method="_on_area_2d_body_exited"]
