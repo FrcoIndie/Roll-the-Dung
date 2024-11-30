@@ -28,11 +28,11 @@ position = Vector2(1008, 924)
 shape = SubResource("RectangleShape2D_u0qth")
 
 [node name="Dung Ball" parent="." instance=ExtResource("3_snu5l")]
-position = Vector2(-548, 727)
+position = Vector2(-465, 726)
 dung_n = 5
 
 [node name="RigidBeetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("8_qprpk")]
-position = Vector2(-681, 742)
+position = Vector2(-654, 706)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Camera2D" type="Camera2D" parent="RigidBeetle"]
