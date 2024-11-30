@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cl4tdr4xplhf3"
+path="res://.godot/imported/lion sleeping 2.mp3-0e9e1269f7564efd1e714ba2ba9124d8.mp3str"
+
+[deps]
+
+source_file="res://audios/lion sleeping 2.mp3"
+dest_files=["res://.godot/imported/lion sleeping 2.mp3-0e9e1269f7564efd1e714ba2ba9124d8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

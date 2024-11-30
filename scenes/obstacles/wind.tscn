@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://blrwrn2cwg8ip"]
+
+[ext_resource type="Script" path="res://scripts/wind.gd" id="1_tu5ti"]
+[ext_resource type="Texture2D" uid="uid://cfe5roxitlxwo" path="res://assets/art/obstacles/viento.png" id="2_4q7hg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnaa2"]
+atlas = ExtResource("2_4q7hg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtult"]
+atlas = ExtResource("2_4q7hg")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m8q85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnaa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtult")
+}],
+"loop": true,
+"name": &"Wind",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yd7l1"]
+size = Vector2(893, 566)
+
+[node name="Wind" type="Node2D" groups=["Ground"]]
+script = ExtResource("1_tu5ti")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_m8q85")
+animation = &"Wind"
+autoplay = "Wind"
+
+[node name="pushArea" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 16
+collision_mask = 6
+
+[node name="pushBox" type="CollisionShape2D" parent="pushArea"]
+position = Vector2(6.99996, -38.5001)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_yd7l1")
+
+[connection signal="body_entered" from="pushArea" to="." method="_on_push_area_body_entered"]
+[connection signal="body_exited" from="pushArea" to="." method="_on_push_area_body_exited"]

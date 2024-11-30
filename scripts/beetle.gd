@@ -3,12 +3,9 @@ extends CharacterBody2D
 
 # --- Variables ---
 @onready var state_chart: StateChart = $StateChart
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var collision_polygon_2d_bend: CollisionPolygon2D = $CollisionPolygon2DBend
-@onready var ray_cast_2d_left: RayCast2D = $RayCast2DLeft
-@onready var ray_cast_2d_right: RayCast2D = $RayCast2DRight
-@onready var ray_cast_2d_dung: RayCast2D = $RayCast2DDung
+@onready var animator: AnimatedSprite2D = $Animator
+@onready var hit_box: CollisionShape2D = $HitBox
+@onready var dung_ray_cast: RayCast2D = $"Dung RayCast"
 @onready var timer: Timer = $Timer
 
 @export_subgroup("Components")
@@ -17,155 +14,155 @@ extends CharacterBody2D
 @export var movement_component: MovementComponent
 @export var animation_component: AnimationComponent
 @export var forces_component: ForcesComponent
-@export var deform_component: DeformComponent
 
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
-@export var BASE_PUSH_FORCE: float = 10.0
 
-var direction: float = 0.0
-var over_dung: bool = false
-var near_dung: int = 0 # The beetle is standing besides the dung when != 0, -1: (D)B | 1: B(D)
-var dung_position: int = near_dung # To keep track if the dung is at the left or at the right of the beetle
-var push_force: float = BASE_PUSH_FORCE
-var throwed: bool = true
+const PUSH_FORCE: float = 0.25
+
+var direction: float = 0.0 # To track the input of the player
+var over_dung: bool = false # 
+var near_dung: bool = false # True if the dung ball is inside the dunbox
+var dung_position: int # To keep track if the dung is at the left or at the right of the beetle
+var push_force: float = PUSH_FORCE
 
 
 # --- Functions ---
-# Process
 func _physics_process(delta: float) -> void:
 	# Components
 	direction = input_component.direction
 	gravity_component.handle_gravity(self, delta)
 	forces_component.beetle_forces(self, push_force)
-	
+	# Movement
 	dung_detection()
 	velocity.x = clamp(velocity.x, -movement_component.max_speed, movement_component.max_speed)
-	
-	state_chart.set_expression_property("throwed", throwed)
-	state_chart.set_expression_property("over_dung", over_dung)
-	# BeetleMovement States' Transitions
-	if is_on_floor():
-		if Input.is_action_just_released("bend"):
-			state_chart.send_event("bend_to_throw")
-		if Input.is_action_pressed("bend"):
-			state_chart.send_event("start_bending")
-		else:
-			if direction == 0.0 and near_dung == 0:
-				state_chart.send_event("to_rest")
-			elif near_dung != 0 and Input.is_action_pressed("climb"):
-				state_chart.send_event("start_climbing")
-			elif direction != 0:
-				state_chart.send_event("start_walking")
-				if sign(near_dung) == sign(direction):
-					state_chart.send_event("start_pushing")
-	else:
-		state_chart.send_event("start_falling")
-	
 	move_and_slide()
 
 
 # Dung Detection
 func dung_detection():
-	ray_cast_2d_left.target_position.x = -5 - sqrt(dung_ball.dung_n)
-	ray_cast_2d_right.target_position.x = 5 + sqrt(dung_ball.dung_n)
-	
+	# Horizontal
 	if dung_ball.position.x < position.x:
 		dung_position = -1
 	else:
 		dung_position = 1
-	
-	# Vertical positioning
-	if ray_cast_2d_dung.is_colliding():
-		state_chart.send_event("stepping_dung")
+	# Vertical
+	if dung_ray_cast.is_colliding():
 		over_dung = true
-	elif ray_cast_2d_left.is_colliding():
-		state_chart.send_event("approaching_dung")
-		near_dung = -1
-	elif ray_cast_2d_right.is_colliding():
-		state_chart.send_event("approaching_dung")
-		near_dung = 1
 	else:
-		state_chart.send_event("moving_away_from_dung")
-		near_dung = 0
+		over_dung = false
+
+func _on_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Dung Ball"):
+		near_dung = true
+
+func _on_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Dung Ball"):
+		near_dung = false
 
 
 # --- FSM ---
-# 1. BeetleMovement States
-# 1.1. Idle State
+# 1 BeetleMovement States
+# 1.1 Idle State
+func _on_idle_state_entered() -> void:
+	pass
+
 func _on_idle_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "decel", direction, delta)
 	animation_component.animate(self, "idle", direction)
+	if is_on_floor():
+		if direction == 0 && near_dung && !over_dung:
+			state_chart.send_event("to_hold")
+		elif direction != 0:
+			state_chart.send_event("to_walk")
+	else:
+		state_chart.send_event("to_fall")
+
+func _on_idle_state_exited() -> void:
+	pass
 
 
-# 1.2. Walk State
+# 1.2 Walk State
+func _on_walk_state_entered() -> void:
+	pass
+
 func _on_walk_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "accel", direction, delta)
 	animation_component.animate(self, "walk", direction)
+	if is_on_floor():
+		if direction == 0 && !near_dung:
+			state_chart.send_event("to_idle")
+		elif direction == dung_position && near_dung && !over_dung:
+			state_chart.send_event("to_hold")
+	else:
+		state_chart.send_event("to_fall")
+
+func _on_walk_state_exited() -> void:
+	pass
 
 
-# 1.3. Hold State
+# 1.3 Hold State
+func _on_hold_state_entered() -> void:
+	animation_component.animate(self, "hold", dung_position)
+	forces_component.flag_forces = true
+
 func _on_dung_idle_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "decel", direction, delta)
-	animation_component.animate(self, "hold", near_dung)
+	if is_on_floor():
+		if direction == 0 && !near_dung:
+			state_chart.send_event("to_idle")
+		elif direction == dung_position && near_dung && !over_dung:
+			state_chart.send_event("to_push")
+		elif (direction == -dung_position) || (direction != 0 && !near_dung):
+			state_chart.send_event("to_walk")
+		elif Input.is_action_pressed("climb") && near_dung && !over_dung:
+			state_chart.send_event("to_climb")
+	else:
+		state_chart.send_event("to_fall")
+
+func _on_hold_state_exited() -> void:
+	forces_component.flag_forces = false
 
 
-# 1.4. Dung State
+# 1.4 Push State
+func _on_dung_state_entered() -> void:
+	forces_component.flag_forces = true
+
 func _on_dung_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "accel", direction, delta)
 	animation_component.animate(self, "dung", direction)
-	push_force = BASE_PUSH_FORCE
-	if direction != near_dung:
-		state_chart.send_event("stop_pushing")
+	if is_on_floor():
+		if direction == 0 && !near_dung:
+			state_chart.send_event("to_idle")
+		elif direction == 0 && near_dung && !over_dung:
+			state_chart.send_event("to_hold")
+		elif (direction != dung_position) || (direction != 0 && !near_dung):
+			state_chart.send_event("to_walk")
+		elif Input.is_action_pressed("climb") && near_dung && !over_dung:
+			state_chart.send_event("to_climb")
+	else:
+		state_chart.send_event("to_fall")
+
+func _on_dung_state_exited() -> void:
+	forces_component.flag_forces = false
 
 
-# 1.5. Bend State
-func _on_bend_state_entered() -> void:
-	throwed = false
-	animation_component.animate(self, "bend", direction)
-	set_collision_mask_value(3, false)
-	deform_component.change_collision_shape(collision_polygon_2d_bend)
-
-func _on_bend_state_physics_processing(delta: float) -> void:
-	movement_component.beetle_movement(self, "decel", direction, delta)
-
-func _on_bend_state_exited() -> void:
-	set_collision_mask_value(3, true)
-	deform_component.change_collision_shape(collision_shape_2d)
-
-
-# 1.6. Throw State
-func _on_throw_state_entered() -> void:
-	animation_component.animate(self, "throw", direction)
-	timer.start()
-
-func _on_throw_state_physics_processing(delta: float) -> void:
-	movement_component.beetle_movement(self, "decel", direction, delta)
-	push_force = 150.0
-
-func _on_throw_state_exited() -> void:
-	push_force = BASE_PUSH_FORCE
-
-func _on_timer_timeout() -> void:
-	throwed = true
-
-
-# 1.7. Climb State
+# 1.5 Climb State
 func _on_climb_state_entered() -> void:
 	animation_component.animate(self, "climb", direction)
+	gravity_component.flag_gravity = false
+	hit_box.disabled = true
 	#var tween := get_tree().create_tween()
 	#tween.tween_property(self, "position", Vector2(dung_ball.position.x - x - dung_position*c, dung_ball.position.y), 0.125*sqrt(dung_ball.dung_n))
 	#tween.tween_property(self, "position", Vector2(dung_ball.position.x, dung_ball.position.y - y - c), 0.25*sqrt(dung_ball.dung_n))
 
 func _on_climb_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "decel", direction, delta)
-	collision_shape_2d.disabled = true
-	gravity_component.gravity = 0.0
-	
-	var c = collision_shape_2d.shape.size.x/2 * scale.x
-	var x = dung_position * (dung_ball.collision_shape_2d.shape.radius) * scale.x
-	var y = (dung_ball.collision_shape_2d.shape.radius) * scale.x
-	match animated_sprite_2d.frame:
+	# Climbing animation offsets
+	var c = hit_box.shape.radius * scale.x
+	var x = dung_position * (dung_ball.hit_box.shape.radius) * scale.x
+	var y = (dung_ball.hit_box.shape.radius) * scale.x
+	match animator.frame:
 		0:
 			pass
 		1:
@@ -183,33 +180,23 @@ func _on_climb_state_physics_processing(delta: float) -> void:
 		5:
 			position.x = dung_ball.position.x
 			position.y = dung_ball.position.y - y - c
-	
-	if !animated_sprite_2d.is_playing():
-		collision_shape_2d.disabled = false
-		gravity_component.gravity = 600.0
+	if !animator.is_playing():
+		state_chart.send_event("to_idle")
+
+func _on_climb_state_exited() -> void:
+	gravity_component.flag_gravity = true
+	hit_box.disabled = false
 
 
-# 1.7. Fall State
+# 1.6 Fall State
+func _on_fall_state_entered() -> void:
+	pass
+
 func _on_fall_state_physics_processing(delta: float) -> void:
 	movement_component.beetle_movement(self, "fall", direction, delta)
 	animation_component.animate(self, "fall", direction)
+	if is_on_floor():
+		state_chart.send_event("to_idle")
 
-
-# 2. RelativeToDung States
-# 2.1. Far State
-
-
-# 2.2. Beside State
-
-
-# 2.3. Over State
-func _on_over_state_physics_processing(delta: float) -> void:
-	set_collision_layer_value(2, false)
-	push_force = 0.0
-	#collision_shape_2d.shape.size.x = 2
-
-func _on_over_state_exited() -> void:
-	set_collision_layer_value(2, true)
-	push_force = BASE_PUSH_FORCE
-	#collision_shape_2d.shape.size.x = 6
-	over_dung = false
+func _on_fall_state_exited() -> void:
+	pass

@@ -1,19 +1,16 @@
-[gd_scene load_steps=56 format=3 uid="uid://dndy5gb1bsgwa"]
+[gd_scene load_steps=48 format=3 uid="uid://dndy5gb1bsgwa"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_ycl0j"]
 [ext_resource type="Texture2D" uid="uid://dcb6p02pcwpcm" path="res://assets/art/Beetle-Sheet.png" id="2_6u6jl"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_lsb30"]
 [ext_resource type="Script" path="res://scripts/input_component.gd" id="3_oys3y"]
 [ext_resource type="Script" path="res://scripts/movement_component.gd" id="3_t77q0"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="4_6xsnh"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_hl1vr"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_0ylmh"]
 [ext_resource type="Script" path="res://scripts/gravity_component.gd" id="5_ur1ma"]
 [ext_resource type="Script" path="res://scripts/animation_component.gd" id="6_5pxr3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_ybrag"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="8_2fcgt"]
 [ext_resource type="Script" path="res://scripts/forces_component.gd" id="12_7yq2o"]
-[ext_resource type="Script" path="res://scripts/deform_component.gd" id="13_hd5mx"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lp0oi"]
 load_path = "res://.godot/imported/Beetle-Sheet.png-16febdd66ec0754389553783bc9bf69c.ctex"
@@ -277,34 +274,14 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_axas7"]
-size = Vector2(6, 6)
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vau2"]
+radius = 4.0
 
-[sub_resource type="Resource" id="Resource_s2tqw"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == false"
+[sub_resource type="CircleShape2D" id="CircleShape2D_2uf84"]
+radius = 6.0
 
-[sub_resource type="Resource" id="Resource_xxb7s"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == false"
-
-[sub_resource type="Resource" id="Resource_fvo1v"]
-script = ExtResource("8_2fcgt")
-expression = "throwed == true"
-
-[sub_resource type="Resource" id="Resource_ifu0e"]
-script = ExtResource("8_2fcgt")
-expression = "throwed == true"
-
-[sub_resource type="Resource" id="Resource_b6mi7"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == true"
-
-[sub_resource type="Resource" id="Resource_bk3to"]
-script = ExtResource("8_2fcgt")
-expression = "over_dung == true"
-
-[node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component", "deform_component")]
+[node name="Beetle" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "forces_component")]
+z_index = 3
 scale = Vector2(7, 7)
 collision_layer = 2
 collision_mask = 23
@@ -315,34 +292,24 @@ input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
 animation_component = NodePath("AnimationComponent")
 forces_component = NodePath("ForcesComponent")
-deform_component = NodePath("DeformComponent")
-BASE_PUSH_FORCE = 50.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animator" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l4t8v")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_axas7")
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7vau2")
 
-[node name="CollisionPolygon2DBend" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(8, 3, -7, 3, -4, 1, 0, 0, 5, 1)
-disabled = true
-
-[node name="RayCast2DLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -0.714286)
-target_position = Vector2(-5, 0)
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 2
 collision_mask = 4
 
-[node name="RayCast2DRight" type="RayCast2D" parent="."]
-position = Vector2(0, -0.714286)
-target_position = Vector2(5, 0)
-collision_mask = 4
+[node name="DungBox" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_2uf84")
 
-[node name="RayCast2DDung" type="RayCast2D" parent="."]
-rotation = 1.5708
-target_position = Vector2(9, -3.25799e-05)
+[node name="Dung RayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 7.57143)
 collision_mask = 4
 
 [node name="Timer" type="Timer" parent="."]
@@ -352,246 +319,140 @@ one_shot = true
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_lsb30")
 
-[node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("4_6xsnh")
-
-[node name="BeetleMovement" type="Node" parent="StateChart/Root"]
+[node name="BeetleMovement" type="Node" parent="StateChart"]
 script = ExtResource("4_hl1vr")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/BeetleMovement"]
+[node name="Idle" type="Node" parent="StateChart/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Fall")
-event = &"start_falling"
-delay_in_seconds = "0.0"
-
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
+[node name="ToWalk" type="Node" parent="StateChart/BeetleMovement/Idle"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"start_walking"
+event = &"to_walk"
 delay_in_seconds = "0.0"
 
-[node name="ToHold" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
+[node name="ToHold" type="Node" parent="StateChart/BeetleMovement/Idle"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Hold")
-event = &"approaching_dung"
+event = &"to_hold"
 delay_in_seconds = "0.0"
 
-[node name="ToBend" type="Node" parent="StateChart/Root/BeetleMovement/Idle"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Bend")
-event = &"start_bending"
-guard = SubResource("Resource_s2tqw")
-delay_in_seconds = "0.0"
-
-[node name="Walk" type="Node" parent="StateChart/Root/BeetleMovement"]
-script = ExtResource("5_0ylmh")
-
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Idle")
-event = &"to_rest"
-delay_in_seconds = "0.0"
-
-[node name="ToHold" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Hold")
-event = &"approaching_dung"
-delay_in_seconds = "0.0"
-
-[node name="ToDung" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Dung")
-event = &"start_pushing"
-delay_in_seconds = "0.0"
-
-[node name="ToBend" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Bend")
-event = &"start_bending"
-guard = SubResource("Resource_xxb7s")
-delay_in_seconds = "0.0"
-
-[node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Walk"]
+[node name="ToFall" type="Node" parent="StateChart/BeetleMovement/Idle"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Fall")
-event = &"start_falling"
+event = &"to_fall"
 delay_in_seconds = "0.0"
 
-[node name="Hold" type="Node" parent="StateChart/Root/BeetleMovement"]
+[node name="Walk" type="Node" parent="StateChart/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
+[node name="ToIdle" type="Node" parent="StateChart/BeetleMovement/Walk"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"to_rest"
+event = &"to_idle"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
+[node name="ToHold" type="Node" parent="StateChart/BeetleMovement/Walk"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Hold")
+event = &"to_hold"
+delay_in_seconds = "0.0"
+
+[node name="ToFall" type="Node" parent="StateChart/BeetleMovement/Walk"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Fall")
+event = &"to_fall"
+delay_in_seconds = "0.0"
+
+[node name="Hold" type="Node" parent="StateChart/BeetleMovement"]
+script = ExtResource("5_0ylmh")
+
+[node name="ToIdle" type="Node" parent="StateChart/BeetleMovement/Hold"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Idle")
+event = &"to_idle"
+delay_in_seconds = "0.0"
+
+[node name="ToWalk" type="Node" parent="StateChart/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"start_walking"
+event = &"to_walk"
 delay_in_seconds = "0.0"
 
-[node name="ToDung" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
+[node name="ToPush" type="Node" parent="StateChart/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
-to = NodePath("../../Dung")
-event = &"start_pushing"
+to = NodePath("../../Push")
+event = &"to_push"
 delay_in_seconds = "0.0"
 
-[node name="ToClimb" type="Node" parent="StateChart/Root/BeetleMovement/Hold"]
+[node name="ToClimb" type="Node" parent="StateChart/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Climb")
-event = &"start_climbing"
+event = &"to_climb"
 delay_in_seconds = "0.0"
 
-[node name="Dung" type="Node" parent="StateChart/Root/BeetleMovement"]
-script = ExtResource("5_0ylmh")
-
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Idle")
-event = &"to_rest"
-delay_in_seconds = "0.0"
-
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Walk")
-event = &"start_walking"
-delay_in_seconds = "0.0"
-
-[node name="ToHold" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Hold")
-event = &"stop_pushing"
-delay_in_seconds = "0.0"
-
-[node name="ToClimb" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Climb")
-event = &"start_climbing"
-delay_in_seconds = "0.0"
-
-[node name="ToFall" type="Node" parent="StateChart/Root/BeetleMovement/Dung"]
+[node name="ToFall" type="Node" parent="StateChart/BeetleMovement/Hold"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Fall")
-event = &"start_falling"
+event = &"to_fall"
 delay_in_seconds = "0.0"
 
-[node name="Bend" type="Node" parent="StateChart/Root/BeetleMovement"]
+[node name="Push" type="Node" parent="StateChart/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToThrow" type="Node" parent="StateChart/Root/BeetleMovement/Bend"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Throw")
-event = &"bend_to_throw"
-delay_in_seconds = "0.0"
-
-[node name="Throw" type="Node" parent="StateChart/Root/BeetleMovement"]
-script = ExtResource("5_0ylmh")
-
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Throw"]
+[node name="ToIdle" type="Node" parent="StateChart/BeetleMovement/Push"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"to_rest"
-guard = SubResource("Resource_fvo1v")
+event = &"to_idle"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Throw"]
+[node name="ToWalk" type="Node" parent="StateChart/BeetleMovement/Push"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"start_walking"
-guard = SubResource("Resource_ifu0e")
+event = &"to_walk"
 delay_in_seconds = "0.0"
 
-[node name="Climb" type="Node" parent="StateChart/Root/BeetleMovement"]
+[node name="ToHold" type="Node" parent="StateChart/BeetleMovement/Push"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Hold")
+event = &"to_hold"
+delay_in_seconds = "0.0"
+
+[node name="ToClimb" type="Node" parent="StateChart/BeetleMovement/Push"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Climb")
+event = &"to_climb"
+delay_in_seconds = "0.0"
+
+[node name="ToFall" type="Node" parent="StateChart/BeetleMovement/Push"]
+script = ExtResource("6_ybrag")
+to = NodePath("../../Fall")
+event = &"to_fall"
+delay_in_seconds = "0.0"
+
+[node name="Climb" type="Node" parent="StateChart/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Climb"]
+[node name="ToIdle" type="Node" parent="StateChart/BeetleMovement/Climb"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"to_rest"
-guard = SubResource("Resource_b6mi7")
+event = &"to_idle"
 delay_in_seconds = "0.0"
 
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Climb"]
+[node name="ToWalk" type="Node" parent="StateChart/BeetleMovement/Climb"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Walk")
-event = &"start_walking"
-guard = SubResource("Resource_bk3to")
+event = &"to_walk"
 delay_in_seconds = "0.0"
 
-[node name="Fall" type="Node" parent="StateChart/Root/BeetleMovement"]
+[node name="Fall" type="Node" parent="StateChart/BeetleMovement"]
 script = ExtResource("5_0ylmh")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/BeetleMovement/Fall"]
+[node name="ToIdle" type="Node" parent="StateChart/BeetleMovement/Fall"]
 script = ExtResource("6_ybrag")
 to = NodePath("../../Idle")
-event = &"to_rest"
-delay_in_seconds = "0.0"
-
-[node name="ToWalk" type="Node" parent="StateChart/Root/BeetleMovement/Fall"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Walk")
-event = &"start_walking"
-delay_in_seconds = "0.0"
-
-[node name="ToBend" type="Node" parent="StateChart/Root/BeetleMovement/Fall"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Bend")
-event = &"start_bending"
-delay_in_seconds = "0.0"
-
-[node name="RelativeToDung" type="Node" parent="StateChart/Root"]
-script = ExtResource("4_hl1vr")
-initial_state = NodePath("Far")
-
-[node name="Far" type="Node" parent="StateChart/Root/RelativeToDung"]
-script = ExtResource("5_0ylmh")
-
-[node name="ToBeside" type="Node" parent="StateChart/Root/RelativeToDung/Far"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Beside")
-event = &"approaching_dung"
-delay_in_seconds = "0.0"
-
-[node name="ToOver" type="Node" parent="StateChart/Root/RelativeToDung/Far"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Over")
-event = &"stepping_dung"
-delay_in_seconds = "0.0"
-
-[node name="Beside" type="Node" parent="StateChart/Root/RelativeToDung"]
-script = ExtResource("5_0ylmh")
-
-[node name="ToFar" type="Node" parent="StateChart/Root/RelativeToDung/Beside"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Far")
-event = &"moving_away_from_dung"
-delay_in_seconds = "0.0"
-
-[node name="ToOver" type="Node" parent="StateChart/Root/RelativeToDung/Beside"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Over")
-event = &"stepping_dung"
-delay_in_seconds = "0.0"
-
-[node name="Over" type="Node" parent="StateChart/Root/RelativeToDung"]
-script = ExtResource("5_0ylmh")
-
-[node name="ToFar" type="Node" parent="StateChart/Root/RelativeToDung/Over"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Far")
-event = &"moving_away_from_dung"
-delay_in_seconds = "0.0"
-
-[node name="ToBeside" type="Node" parent="StateChart/Root/RelativeToDung/Over"]
-script = ExtResource("6_ybrag")
-to = NodePath("../../Beside")
-event = &"moving_away_from_dung"
+event = &"to_idle"
 delay_in_seconds = "0.0"
 
 [node name="GravityComponent" type="Node2D" parent="."]
@@ -605,28 +466,29 @@ script = ExtResource("3_t77q0")
 
 [node name="AnimationComponent" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("6_5pxr3")
-sprite = NodePath("../AnimatedSprite2D")
+sprite = NodePath("../Animator")
 
 [node name="ForcesComponent" type="Node2D" parent="."]
 script = ExtResource("12_7yq2o")
 
-[node name="DeformComponent" type="Node2D" parent="." node_paths=PackedStringArray("shapes")]
-script = ExtResource("13_hd5mx")
-shapes = [NodePath("../CollisionShape2D"), NodePath("../CollisionPolygon2DBend")]
-
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Idle" to="." method="_on_idle_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Walk" to="." method="_on_walk_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Hold" to="." method="_on_dung_idle_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Dung" to="." method="_on_dung_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/BeetleMovement/Bend" to="." method="_on_bend_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/BeetleMovement/Bend" to="." method="_on_bend_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Bend" to="." method="_on_bend_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/BeetleMovement/Throw" to="." method="_on_throw_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/BeetleMovement/Throw" to="." method="_on_throw_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Throw" to="." method="_on_throw_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/BeetleMovement/Climb" to="." method="_on_climb_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Climb" to="." method="_on_climb_state_physics_processing"]
-[connection signal="state_physics_processing" from="StateChart/Root/BeetleMovement/Fall" to="." method="_on_fall_state_physics_processing"]
-[connection signal="state_exited" from="StateChart/Root/RelativeToDung/Over" to="." method="_on_over_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/RelativeToDung/Over" to="." method="_on_over_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/BeetleMovement/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_exited" from="StateChart/BeetleMovement/Idle" to="." method="_on_idle_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/BeetleMovement/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/BeetleMovement/Walk" to="." method="_on_walk_state_entered"]
+[connection signal="state_exited" from="StateChart/BeetleMovement/Walk" to="." method="_on_walk_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/BeetleMovement/Walk" to="." method="_on_walk_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/BeetleMovement/Hold" to="." method="_on_hold_state_entered"]
+[connection signal="state_exited" from="StateChart/BeetleMovement/Hold" to="." method="_on_hold_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/BeetleMovement/Hold" to="." method="_on_dung_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/BeetleMovement/Push" to="." method="_on_dung_state_entered"]
+[connection signal="state_exited" from="StateChart/BeetleMovement/Push" to="." method="_on_dung_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/BeetleMovement/Push" to="." method="_on_dung_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/BeetleMovement/Climb" to="." method="_on_climb_state_entered"]
+[connection signal="state_exited" from="StateChart/BeetleMovement/Climb" to="." method="_on_climb_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/BeetleMovement/Climb" to="." method="_on_climb_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/BeetleMovement/Fall" to="." method="_on_fall_state_entered"]
+[connection signal="state_exited" from="StateChart/BeetleMovement/Fall" to="." method="_on_fall_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/BeetleMovement/Fall" to="." method="_on_fall_state_physics_processing"]

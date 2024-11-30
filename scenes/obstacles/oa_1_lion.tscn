@@ -1,0 +1,136 @@
+[gd_scene load_steps=17 format=3 uid="uid://cobu5jfv0pfxy"]
+
+[ext_resource type="Script" path="res://scripts/oa_1_lion.gd" id="1_2cpji"]
+[ext_resource type="Texture2D" uid="uid://bl63ch2k8oixh" path="res://assets/art/obstacles/OA1 Liont.png" id="1_7jjfb"]
+[ext_resource type="Texture2D" uid="uid://cox4q8km8h5sy" path="res://assets/art/obstacles/OA1 Lion-Sheet.png" id="1_i581s"]
+[ext_resource type="AudioStream" uid="uid://ba0tvwr5xro7n" path="res://audios/lion sleeping 1.mp3" id="4_dykrl"]
+[ext_resource type="AudioStream" uid="uid://cl4tdr4xplhf3" path="res://audios/lion sleeping 2.mp3" id="5_p5t7j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epfan"]
+atlas = ExtResource("1_i581s")
+region = Rect2(144, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cxv2"]
+atlas = ExtResource("1_i581s")
+region = Rect2(288, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi4v0"]
+atlas = ExtResource("1_i581s")
+region = Rect2(432, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_disrc"]
+atlas = ExtResource("1_i581s")
+region = Rect2(576, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rhxd"]
+atlas = ExtResource("1_i581s")
+region = Rect2(720, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0st1q"]
+atlas = ExtResource("1_i581s")
+region = Rect2(864, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb385"]
+atlas = ExtResource("1_i581s")
+region = Rect2(144, 64, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep5bq"]
+atlas = ExtResource("1_i581s")
+region = Rect2(288, 64, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ku1be"]
+atlas = ExtResource("1_i581s")
+region = Rect2(432, 64, 144, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ck7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epfan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cxv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi4v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_disrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rhxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0st1q")
+}],
+"loop": false,
+"name": &"move",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb385")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep5bq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ku1be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep5bq")
+}],
+"loop": true,
+"name": &"wait",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4eyn"]
+size = Vector2(105, 91)
+
+[node name="OA1 Lion" type="Node2D"]
+z_index = -2
+script = ExtResource("1_2cpji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(7, 7)
+texture = ExtResource("1_7jjfb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_8ck7a")
+animation = &"move"
+autoplay = "wait"
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-298, 123)
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-55.5, 13.5)
+shape = SubResource("RectangleShape2D_r4eyn")
+
+[node name="snore1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dykrl")
+max_distance = 1500.0
+
+[node name="snore2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_p5t7j")
+max_distance = 1500.0
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_obstacle_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

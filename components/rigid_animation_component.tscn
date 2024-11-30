@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfs533wo6qr07"]
+
+[ext_resource type="Script" path="res://scripts/rigid_animation_component.gd" id="1_2u21q"]
+
+[node name="RigidAnimationComponent" type="Node2D"]
+script = ExtResource("1_2u21q")

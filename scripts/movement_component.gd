@@ -3,7 +3,7 @@ extends Node2D
 
 
 @export_subgroup("Settings")
-@export var max_speed: float = 250.0
+@export var max_speed: float = 200.0
 @export var accel: float = 20.0
 @export var decel: float = 20.0
 @export var fall_decel: float = 0.0

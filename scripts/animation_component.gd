@@ -3,7 +3,7 @@ extends Node2D
 
 
 @export_subgroup("Nodes")
-@export var 	sprite: AnimatedSprite2D
+@export var sprite: AnimatedSprite2D
 
 
 func horizontal_flip(direction: float) -> void:

@@ -1,0 +1,165 @@
+[gd_scene load_steps=22 format=3 uid="uid://co6v1q5ws04xl"]
+
+[ext_resource type="Texture2D" uid="uid://7n8tfcx25hgv" path="res://assets/art/obstacles/OT1 Geyser-Sheet.png" id="1_ociqa"]
+[ext_resource type="Script" path="res://scripts/ot_1_geyser.gd" id="1_swq1s"]
+[ext_resource type="AudioStream" uid="uid://igst77uyspc4" path="res://audios/geyser sound.mp3" id="3_hy8ki"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf1bo"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxs52"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp2v2"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_188dh"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d12b"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(192, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcqty"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(240, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rddo"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(288, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e43ok"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(336, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8m0i"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(384, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j314f"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(432, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mddqf"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(480, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12t3g"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(528, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjpot"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(576, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_762f7"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(624, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7htkw"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(672, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd610"]
+atlas = ExtResource("1_ociqa")
+region = Rect2(720, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ie23j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf1bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxs52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp2v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_188dh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d12b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcqty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rddo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e43ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8m0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j314f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mddqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12t3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjpot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_762f7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7htkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd610")
+}],
+"loop": false,
+"name": &"eject",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0ai1"]
+size = Vector2(98, 98)
+
+[node name="OT1 Geyser" type="Node2D" groups=["Ground"]]
+script = ExtResource("1_swq1s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(7, 7)
+sprite_frames = SubResource("SpriteFrames_ie23j")
+animation = &"eject"
+autoplay = "eject"
+
+[node name="CollisionArea" type="StaticBody2D" parent="." groups=["Ground"]]
+collision_mask = 31
+
+[node name="HitBox" type="CollisionPolygon2D" parent="CollisionArea"]
+polygon = PackedVector2Array(-31, 132, 14, 138, 53, 131, 99, 166, 146, 203, 54, 211, -126, 210, -90, 170)
+
+[node name="EjectArea" type="Area2D" parent="."]
+position = Vector2(1, 175)
+collision_layer = 16
+collision_mask = 6
+
+[node name="EjectBox" type="CollisionShape2D" parent="EjectArea"]
+position = Vector2(13, -7)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_d0ai1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hy8ki")
+max_distance = 700.0
+
+[connection signal="body_entered" from="EjectArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="EjectArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
