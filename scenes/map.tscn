@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cobu5jfv0pfxy" path="res://scenes/obstacles/oa_1_lion.tscn" id="1_x1mtv"]
 [ext_resource type="Texture2D" uid="uid://yncxgr044to5" path="res://assets/tilesets/arboles.png" id="2_3eoxy"]
 [ext_resource type="PackedScene" uid="uid://dklcisk4nkuyq" path="res://scenes/tilemaps/sky.tscn" id="2_dinvn"]
-[ext_resource type="PackedScene" uid="uid://dndy5gb1bsgwa" path="res://scenes/beetle.tscn" id="3_656ha"]
 [ext_resource type="PackedScene" uid="uid://b8npdaq3t10jh" path="res://scenes/tilemaps/water.tscn" id="3_lwf6r"]
 [ext_resource type="PackedScene" uid="uid://bmiabs5bdcwge" path="res://scenes/dung_ball.tscn" id="4_dhshu"]
 [ext_resource type="Texture2D" uid="uid://dygaqd31wl3ow" path="res://assets/art/madriguera.png" id="6_5i544"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dmb11up37s8oj" path="res://scenes/obstacles/oa_2_elephant.tscn" id="9_eeixy"]
 [ext_resource type="Script" path="res://scripts/path_follow_2d.gd" id="10_tffad"]
 [ext_resource type="PackedScene" uid="uid://c6vt2c5xe50k1" path="res://scenes/dung.tscn" id="11_da55w"]
+[ext_resource type="PackedScene" uid="uid://srwaah0btci4" path="res://scenes/rigid_beetle.tscn" id="15_gi385"]
 [ext_resource type="AudioStream" uid="uid://c378gwixxrqsp" path="res://audios/space.mp3" id="15_kfcxc"]
 [ext_resource type="PackedScene" uid="uid://tttfeidd38do" path="res://scenes/obstacles/ot_2_geyser.tscn" id="15_ngiys"]
 [ext_resource type="PackedScene" uid="uid://blrwrn2cwg8ip" path="res://scenes/obstacles/wind.tscn" id="16_nh3ab"]
@@ -146,25 +146,15 @@ collision_mask = 6
 position = Vector2(2042.86, 68.4286)
 shape = SubResource("RectangleShape2D_bp4kc")
 
-[node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_656ha")]
-position = Vector2(90, 629)
-dung_ball = NodePath("../Dung Ball")
-
-[node name="Camera2D" type="Camera2D" parent="Beetle"]
-position = Vector2(0, -20)
-
-[node name="Dung Ball" parent="." instance=ExtResource("4_dhshu")]
-position = Vector2(971, 454)
-
 [node name="OT1 Geyser" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_gl6q3")]
 position = Vector2(-3061, 702)
-beetle = NodePath("../Beetle")
+beetle = NodePath("../RigidBeetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="OT1 Geyser5" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_gl6q3")]
 position = Vector2(12854, 395)
 rotation = -1.19555
-beetle = NodePath("../Beetle")
+beetle = NodePath("../RigidBeetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -176,13 +166,13 @@ script = ExtResource("10_tffad")
 
 [node name="OA2 Elephant" parent="Path2D/PathFollow2D" node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("9_eeixy")]
 position = Vector2(2902, -412)
-beetle = NodePath("../../../Beetle")
+beetle = NodePath("../../../RigidBeetle")
 dung_ball = NodePath("../../../Dung Ball")
 
 [node name="OA1 Lion" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("1_x1mtv")]
 z_index = -1
 position = Vector2(3124, 49)
-beetle = NodePath("../Beetle")
+beetle = NodePath("../RigidBeetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Dung" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("11_da55w")]
@@ -205,22 +195,41 @@ text = "¡Felicidades, llegaste a salvo a la madriguera!"
 [node name="SpaceTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_kfcxc")
 
-[node name="OT1 Geyser2" parent="." instance=ExtResource("15_ngiys")]
+[node name="OT1 Geyser2" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("15_ngiys")]
 position = Vector2(-1299, 701)
+beetle = NodePath("../RigidBeetle")
+dung_ball = NodePath("../Dung Ball")
 
-[node name="OT1 Geyser3" parent="." instance=ExtResource("15_ngiys")]
+[node name="OT1 Geyser3" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("15_ngiys")]
 position = Vector2(563, 850)
+beetle = NodePath("../RigidBeetle")
+dung_ball = NodePath("../Dung Ball")
 
-[node name="OT1 Geyser4" parent="." instance=ExtResource("15_ngiys")]
+[node name="OT1 Geyser4" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("15_ngiys")]
 position = Vector2(4709, 18)
+beetle = NodePath("../RigidBeetle")
+dung_ball = NodePath("../Dung Ball")
 
-[node name="Wind" parent="." instance=ExtResource("16_nh3ab")]
+[node name="Wind" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("16_nh3ab")]
 position = Vector2(1316, 512)
+beetle = NodePath("../RigidBeetle")
+dung_ball = NodePath("../Dung Ball")
 
-[node name="Wind2" parent="." instance=ExtResource("16_nh3ab")]
+[node name="Wind2" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("16_nh3ab")]
 position = Vector2(3930, -219)
+beetle = NodePath("../RigidBeetle")
+dung_ball = NodePath("../Dung Ball")
 
-[node name="Wind3" parent="." instance=ExtResource("16_nh3ab")]
+[node name="Wind3" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("16_nh3ab")]
 position = Vector2(11746, 797)
+beetle = NodePath("../RigidBeetle")
+dung_ball = NodePath("../Dung Ball")
+
+[node name="RigidBeetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("15_gi385")]
+position = Vector2(170, 798)
+dung_ball = NodePath("../Dung Ball")
+
+[node name="Dung Ball" parent="." instance=ExtResource("4_dhshu")]
+position = Vector2(971, 454)
 
 [connection signal="body_entered" from="Burrow/Area2D" to="." method="_on_area_2d_body_entered"]
