@@ -121,6 +121,7 @@ func _on_walk_state_exited() -> void:
 # Hold State
 func _on_hold_state_entered() -> void:
 	rigid_animation_component.animate("hold", dung_position)
+	dung_ball.set_collision_mask_value(2, true)
 
 func _on_hold_state_physics_processing(delta: float) -> void:
 	if on_floor || over_dung:
@@ -136,7 +137,7 @@ func _on_hold_state_physics_processing(delta: float) -> void:
 		state_chart.send_event("to_fall")
 
 func _on_hold_state_exited() -> void:
-	pass
+	dung_ball.set_collision_mask_value(2, false)
 
 
 # Push State
@@ -145,9 +146,6 @@ func _on_push_state_entered() -> void:
 
 func _on_push_state_physics_processing(delta: float) -> void:
 	rigid_animation_component.animate("push", dung_position)
-	
-	
-	
 	if on_floor || over_dung:
 		if direction == 0 && !near_dung:
 			state_chart.send_event("to_idle")
