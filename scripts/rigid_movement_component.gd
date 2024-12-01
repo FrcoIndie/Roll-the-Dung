@@ -17,5 +17,5 @@ func beetle_movement(body: RigidBody2D, direction: float, delta: float):
 		
 		body.apply_central_impulse(velocity)
 		
-		if body.linear_velocity.length() > MAX_SPEED:
-			body.linear_velocity = body.linear_velocity.normalized() * MAX_SPEED
+		if abs(body.linear_velocity.x) > MAX_SPEED:
+			body.linear_velocity.x = sign(body.linear_velocity.x) * MAX_SPEED

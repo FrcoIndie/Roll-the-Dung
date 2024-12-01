@@ -7,11 +7,10 @@ extends Node2D
 @onready var snore_2 = $snore2
 
 @export_subgroup("Forces")
-@export var BEETLE_FORCE_VECTOR: Vector2 = Vector2(15.0, 45.0)
-@export var DUNG_FORCE_VECTOR: Vector2 = Vector2(0.25, 1.0)
+@export var FORCE_VECTOR: Vector2 = Vector2(0.5, 0.75)
 
 @export_subgroup("Bodies")
-@export var beetle: CharacterBody2D
+@export var beetle: RigidBody2D
 @export var dung_ball: RigidBody2D
 
 var beetle_in_area: bool = false
@@ -22,9 +21,9 @@ var time_to_snore: bool = false
 func _physics_process(delta: float) -> void:
 	if animated_sprite_2d.animation == "move" && animated_sprite_2d.frame < 3:
 		if beetle_in_area:
-			beetle.velocity -= BEETLE_FORCE_VECTOR
+			beetle.apply_central_impulse(-FORCE_VECTOR)
 		if dung_in_area:
-			dung_ball.apply_impulse(-DUNG_FORCE_VECTOR, Vector2.ZERO)
+			dung_ball.apply_central_impulse(-FORCE_VECTOR)
 
 
 func _on_timer_timeout() -> void:

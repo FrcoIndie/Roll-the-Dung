@@ -34,10 +34,10 @@ func _ready() -> void:
 	set_lock_rotation_enabled(true)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	direction = input_component.direction
 	rigid_movement_component.beetle_movement(self, direction, delta)
-	floor_detection()
+	slope_detection()
 	dung_detection()
 
 
@@ -67,12 +67,17 @@ func _on_over_area_body_exited(body: Node2D) -> void:
 
 
 # Floor Detection
-func floor_detection():
+func slope_detection():
 	if ray_cast.is_colliding():
-		on_floor = true
 		var surface_normal = ray_cast.get_collision_normal()
 		slope_angle = surface_normal.angle_to(Vector2.UP)
-	else:
+
+func _on_body_entered(body: Node) -> void:
+	if body.is_in_group("Ground"):
+		on_floor = true
+
+func _on_body_exited(body: Node) -> void:
+	if body.is_in_group("Ground"):
 		on_floor = false
 
 

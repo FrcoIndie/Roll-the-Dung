@@ -7,15 +7,15 @@ extends Node2D
 @onready var step_3 = $step_3
 @onready var step_4 = $step_4
 
-const MIN_BEETLE_FORCE: Vector2 = Vector2(0.0, 300.0)
-const MAX_BEETLE_FORCE: Vector2 = Vector2(0.0, 600.0)
-const MIN_DUNG_FORCE: Vector2 = Vector2(0.0, 2.0)
-const MAX_DUNG_FORCE: Vector2 = Vector2(0.0, 5.0)
+const MIN_BEETLE_FORCE_VECTOR: Vector2 = Vector2(0.0, 2.0)
+const MAX_BEETLE_FORCE_VECTOR: Vector2 = Vector2(0.0, 6.0)
+const MIN_DUNG_FORCE_VECTOR: Vector2 = Vector2(0.0, 5.0)
+const MAX_DUNG_FORCE_VECTOR: Vector2 = Vector2(0.0, 10.0)
 
 @export var MAX_DISTANCE: float = 1000.0
 
 @export_subgroup("Bodies")
-@export var beetle: CharacterBody2D
+@export var beetle: RigidBody2D
 @export var dung_ball: RigidBody2D
 
 var beetle_distance: float
@@ -39,22 +39,22 @@ func handle_beetle_distance() -> Vector2:
 		return Vector2.ZERO
 	else:
 		var t: float = beetle_distance / MAX_DISTANCE
-		return MIN_BEETLE_FORCE.lerp(MAX_BEETLE_FORCE, 1.0 - t)
+		return MIN_BEETLE_FORCE_VECTOR.lerp(MAX_BEETLE_FORCE_VECTOR, 1.0 - t)
 
 func handle_dung_distance() -> Vector2:
 	if dung_distance > MAX_DISTANCE:
 		return Vector2.ZERO
 	else:
 		var t: float = dung_distance / MAX_DISTANCE
-		return MIN_DUNG_FORCE.lerp(MAX_DUNG_FORCE, 1.0 - t)
+		return MIN_DUNG_FORCE_VECTOR.lerp(MAX_DUNG_FORCE_VECTOR, 1.0 - t)
 
 
 func walk(beetle_force_vector, dung_force_vector) -> void:
 	if previous_frame == 0 && current_frame == 1:
-		if beetle.is_on_floor():
-			beetle.velocity -= beetle_force_vector
+		if beetle.on_floor:
+			beetle.apply_central_impulse(-beetle_force_vector)
 		if dung_ball.on_ground:
-			dung_ball.apply_impulse(-dung_force_vector, Vector2.ZERO)
+			dung_ball.apply_central_impulse(-dung_force_vector)
 	previous_frame = animated_sprite_2d.frame
 
 
