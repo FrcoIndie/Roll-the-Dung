@@ -15,7 +15,7 @@ extends RigidBody2D
 @export_subgroup("Dung")
 @export var dung_ball: RigidBody2D
 
-const PUSH_FORCE: float = 1.0
+const PUSH_FORCE: float = 0.25
 
 var direction: float = 0.0 # To track the input of the player
 var over_dung: bool = false
@@ -145,9 +145,6 @@ func _on_push_state_entered() -> void:
 
 func _on_push_state_physics_processing(delta: float) -> void:
 	rigid_animation_component.animate("push", dung_position)
-	
-	
-	
 	if on_floor || over_dung:
 		if direction == 0 && !near_dung:
 			state_chart.send_event("to_idle")
@@ -159,13 +156,6 @@ func _on_push_state_physics_processing(delta: float) -> void:
 			state_chart.send_event("to_climb")
 	else:
 		state_chart.send_event("to_fall")
-	
-	if abs(dung_ball.angular_velocity) < 0.2:
-		push_force += 100.0
-	else:
-		push_force = PUSH_FORCE
-	dung_ball.apply_force(Vector2(direction * push_force, 0.0), Vector2(0.0, -dung_ball.hit_box.shape.radius))
-	
 
 func _on_push_state_exited() -> void:
 	pass

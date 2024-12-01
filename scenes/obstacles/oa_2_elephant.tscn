@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dmb11up37s8oj"]
+[gd_scene load_steps=21 format=3 uid="uid://dmb11up37s8oj"]
 
 [ext_resource type="Script" path="res://scripts/oa_2_elephant.gd" id="1_dshf6"]
 [ext_resource type="Texture2D" uid="uid://b1n3hv8vdhel3" path="res://assets/art/obstacles/OA2 Elephant-Sheet.png" id="1_twl7a"]
@@ -103,11 +103,8 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 2.0
+"speed": 1.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gugwu"]
-radius = 1000.0
 
 [node name="OA2 Elephant" type="Node2D"]
 script = ExtResource("1_dshf6")
@@ -118,13 +115,6 @@ sprite_frames = SubResource("SpriteFrames_vmp2o")
 autoplay = "default"
 frame_progress = 0.876457
 flip_h = true
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_gugwu")
 
 [node name="step_1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_rwols")
@@ -146,6 +136,4 @@ max_distance = 4000.0
 wait_time = 1.5
 autostart = true
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
