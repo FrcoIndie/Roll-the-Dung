@@ -327,7 +327,7 @@ shape = SubResource("RectangleShape2D_3fbnl")
 
 [node name="RayCast" type="RayCast2D" parent="."]
 scale = Vector2(7, 7)
-target_position = Vector2(0, 4)
+target_position = Vector2(0, 10)
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_ugt8w")
