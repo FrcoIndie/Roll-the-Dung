@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var victoria = $Victoria
 @onready var space_theme = $SpaceTheme
+@onready var rigid_beetle = $RigidBeetle
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,16 +18,17 @@ func _process(delta):
 func _on_area_2d_body_entered(body: RigidBody2D) -> void:
 	victoria.visible = true
 
-
-func _on_space_area_body_entered(body):
-	var tween = create_tween()
-	tween.tween_property(space_theme, "volume_db", 0, 0.7)
-
-
-func _on_space_area_body_exited(body):
-	var tween = create_tween()
-	tween.tween_property(space_theme, "volume_db", -80.0, 1.0)
-
-
 func _on_space_theme_finished():
 	space_theme.play()
+
+
+func on_space_entered(body):
+	if body == rigid_beetle:
+		var tween = create_tween()
+		tween.tween_property(space_theme, "volume_db", 0, 0.7)
+
+
+func on_space_exited(body):
+	if body == rigid_beetle:
+		var tween = create_tween()
+		tween.tween_property(space_theme, "volume_db", -80.0, 1.0)
