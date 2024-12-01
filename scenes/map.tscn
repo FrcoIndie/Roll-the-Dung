@@ -148,7 +148,7 @@ position = Vector2(2025.29, -20.5714)
 shape = SubResource("RectangleShape2D_bp4kc")
 
 [node name="Beetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("3_656ha")]
-position = Vector2(5667, -88)
+position = Vector2(4732, -219)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Camera2D" type="Camera2D" parent="Beetle"]
