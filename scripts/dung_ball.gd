@@ -15,8 +15,8 @@ var on_water: bool = false
 
 
 # --- Functions ---
-func _ready() -> void:
-	dung_size(dung_n)
+##func _ready() -> void:
+	##dung_size(dung_n)
 
 
 func _physics_process(delta: float) -> void:
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 
 # To manage the size and weight of the dung ball
 func dung_size(n: int):
-	mass = 0.01 * n + 0.01
+	mass += 0.005 * n
 	sprite.frame = n
 	hit_box.shape.radius = 5 + n
 	ground_box.shape.radius = 6 + n
