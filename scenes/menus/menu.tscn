@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpui5euxc4h0k"]
+[gd_scene load_steps=3 format=3 uid="uid://dpui5euxc4h0k"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_b5dp6"]
+[ext_resource type="FontFile" uid="uid://hogkfhe7c3l6" path="res://assets/fonts/MEGAMAN10.ttf" id="2_p38n4"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -23,11 +24,13 @@ alignment = 1
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_p38n4")
 theme_override_font_sizes/font_size = 100
 text = "Jugar"
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_p38n4")
 theme_override_font_sizes/font_size = 100
 text = "Salir"
 
@@ -38,9 +41,11 @@ offset_top = 83.0
 offset_right = 1749.0
 offset_bottom = 356.0
 theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_fonts/font = ExtResource("2_p38n4")
 theme_override_font_sizes/font_size = 200
 text = "ROLL THE DUNG"
 horizontal_alignment = 1
+uppercase = true
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
@@ -49,15 +54,18 @@ offset_top = 700.0
 offset_right = 1758.0
 offset_bottom = 1057.0
 theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_fonts/font = ExtResource("2_p38n4")
 theme_override_font_sizes/font_size = 50
-text = "Versión Beta
+text = "Version Beta
 
-Rodrigo Alarcón, Joaquín Hevia y Franco Salgado.
+Rodrigo Alarcon, Joaquin Hevia y Franco Salgado.
 
-Todos los assets utilizados, excepto audios, son originales.
+Todos los assets utilizados, excepto audios y fuentes, son originales.
+Ver itch.io para los respectivos creditos.
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

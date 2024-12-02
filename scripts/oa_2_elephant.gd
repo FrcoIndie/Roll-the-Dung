@@ -8,8 +8,8 @@ extends Node2D
 @onready var step_3 = $step_3
 @onready var step_4 = $step_4
 
-const BEETLE_FORCE_VECTOR: Vector2 = Vector2(0.0, 1.5)
-const DUNG_FORCE_VECTOR: Vector2 = Vector2(0.0, 6.0)
+const BEETLE_FORCE_VECTOR: Vector2 = Vector2(0.0, 2.5)
+const DUNG_FORCE_VECTOR: Vector2 = Vector2(0.0, 25.0)
 
 @export_subgroup("Bodies")
 @export var beetle: RigidBody2D
