@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b01o27q38w8mn"
-path="res://.godot/imported/madriguera.png-cf2aa7da6c25c72cdc04acfed7dd7fc7.ctex"
+uid="uid://b2sgyrlrwvaea"
+path="res://.godot/imported/txt-madriguera.png-1f1a09217c17caa1e4e00e85ea0fca5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/madriguera.png"
-dest_files=["res://.godot/imported/madriguera.png-cf2aa7da6c25c72cdc04acfed7dd7fc7.ctex"]
+source_file="res://assets/art/iu/txt-madriguera.png"
+dest_files=["res://.godot/imported/txt-madriguera.png-1f1a09217c17caa1e4e00e85ea0fca5f.ctex"]
 
 [params]
 

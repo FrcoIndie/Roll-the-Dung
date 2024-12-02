@@ -1,16 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://cupx3pn8a2yk6"]
+[gd_scene load_steps=11 format=3 uid="uid://cupx3pn8a2yk6"]
 
-[ext_resource type="Texture2D" uid="uid://c67wdqxdvl3pa" path="res://assets/art/iu/Bubble.png" id="1_2f1pp"]
 [ext_resource type="Script" path="res://scripts/bubble.gd" id="1_xo2a1"]
 [ext_resource type="FontFile" uid="uid://hogkfhe7c3l6" path="res://assets/fonts/MEGAMAN10.ttf" id="2_2mmrp"]
+[ext_resource type="Texture2D" uid="uid://cuknnsm2rxv4k" path="res://assets/art/iu/Bubble-Sheet.png" id="2_vi0ak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yly1s"]
+atlas = ExtResource("2_vi0ak")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmka6"]
+atlas = ExtResource("2_vi0ak")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m6ge"]
+atlas = ExtResource("2_vi0ak")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx4oe"]
+atlas = ExtResource("2_vi0ak")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkjch"]
+atlas = ExtResource("2_vi0ak")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd11g"]
+atlas = ExtResource("2_vi0ak")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_667la"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yly1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmka6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m6ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nx4oe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkjch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd11g")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 10.0
+}]
 
 [node name="Bubble" type="Node2D"]
 script = ExtResource("1_xo2a1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 10)
 scale = Vector2(7, 7)
-texture = ExtResource("1_2f1pp")
+sprite_frames = SubResource("SpriteFrames_667la")
+animation = &"pop"
+frame = 5
+frame_progress = 1.0
 
 [node name="Label" type="Label" parent="."]
 offset_left = -77.0
@@ -21,3 +74,9 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_2mmrp")
 theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
+
+[node name="DeadTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_sprite_2d_animation_finished"]
+[connection signal="timeout" from="DeadTimer" to="." method="_on_dead_timeout"]
