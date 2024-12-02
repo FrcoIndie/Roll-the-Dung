@@ -105,11 +105,11 @@ autoplay = "wait"
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 2.5
+wait_time = 4.0
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-298, 123)
+position = Vector2(-321, -9)
 collision_layer = 16
 collision_mask = 6
 
