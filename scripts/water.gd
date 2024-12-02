@@ -4,6 +4,7 @@ extends Area2D
 @onready var collision_water: CollisionShape2D = $CollisionWater
 
 @export_subgroup("Dung")
+@export var beetle: RigidBody2D
 @export var dung_ball: RigidBody2D
 
 const THRUST_VECTOR: Vector2 = Vector2(0.0, 5.0)

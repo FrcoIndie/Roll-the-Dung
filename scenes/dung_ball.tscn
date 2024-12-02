@@ -12,9 +12,10 @@ radius = 6.0
 [node name="Dung Ball" type="RigidBody2D" groups=["Dung Ball"]]
 z_index = 2
 collision_layer = 4
-collision_mask = 61
+collision_mask = 63
 mass = 0.01
 script = ExtResource("1_3hgia")
+dung_n = 3
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(7, 7)

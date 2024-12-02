@@ -125,7 +125,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0ai1"]
-size = Vector2(98, 98)
+size = Vector2(173, 98)
 
 [node name="OT1 Geyser" type="Node2D" groups=["Ground"]]
 script = ExtResource("1_tpdwh")
@@ -149,7 +149,7 @@ collision_layer = 16
 collision_mask = 6
 
 [node name="EjectBox" type="CollisionShape2D" parent="EjectArea"]
-position = Vector2(13, -7)
+position = Vector2(12.9999, -44.5)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_d0ai1")
 
