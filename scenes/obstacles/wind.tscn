@@ -153,15 +153,15 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yd7l1"]
-size = Vector2(45.3214, 54.6964)
+size = Vector2(22.2589, 25.4599)
 
 [node name="Wind" type="Node2D" groups=["Ground"]]
 scale = Vector2(7, 7)
 script = ExtResource("1_tu5ti")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.142859, 0.857143)
-scale = Vector2(0.446429, 0.372768)
+position = Vector2(0.0714302, -2.38419e-07)
+scale = Vector2(0.204241, 0.180804)
 sprite_frames = SubResource("SpriteFrames_m8q85")
 animation = &"breeze"
 autoplay = "breeze"
@@ -173,6 +173,7 @@ collision_layer = 16
 collision_mask = 6
 
 [node name="pushBox" type="CollisionShape2D" parent="pushArea"]
+position = Vector2(0.142856, -1)
 rotation = -1.5708
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_yd7l1")

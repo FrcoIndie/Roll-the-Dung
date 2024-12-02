@@ -429,7 +429,7 @@ delay_in_seconds = "0.0"
 script = ExtResource("6_sx0lh")
 to = NodePath("../../Hold")
 event = &"to_hold"
-delay_in_seconds = "0.0"
+delay_in_seconds = "0.2"
 
 [node name="ToClimb" type="Node" parent="StateChart/BeetleMovement/Push"]
 script = ExtResource("6_sx0lh")
