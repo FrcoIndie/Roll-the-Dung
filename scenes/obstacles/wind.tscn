@@ -175,12 +175,11 @@ collision_mask = 6
 [node name="pushBox" type="CollisionShape2D" parent="pushArea"]
 position = Vector2(0.142856, -1)
 rotation = -1.5708
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_yd7l1")
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 3.0
+wait_time = 8.0
 autostart = true
 
 [node name="blow" type="AudioStreamPlayer2D" parent="."]

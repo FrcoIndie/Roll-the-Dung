@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpui5euxc4h0k"]
+[gd_scene load_steps=2 format=3 uid="uid://dpui5euxc4h0k"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_b5dp6"]
-[ext_resource type="Texture2D" uid="uid://og76xb3bvr15" path="res://assets/art/iu/WASD.png" id="2_k1rxj"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -45,24 +44,20 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = -173.0
-offset_top = 667.0
-offset_right = 1405.0
-offset_bottom = 1024.0
+offset_left = 180.0
+offset_top = 700.0
+offset_right = 1758.0
+offset_bottom = 1057.0
 theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
 theme_override_font_sizes/font_size = 50
-text = "Pre-Alfa
+text = "Versión Beta
 
 Rodrigo Alarcón, Joaquín Hevia y Franco Salgado.
 
-Todos los assets utilizados son originales."
+Todos los assets utilizados, excepto audios, son originales.
+"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="WASD" type="Sprite2D" parent="."]
-position = Vector2(1793, 893)
-scale = Vector2(8.15625, 9.375)
-texture = ExtResource("2_k1rxj")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
