@@ -176,13 +176,12 @@ collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Burrow/Area2D"]
 position = Vector2(1497.86, 265.286)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_bp4kc")
 
 [node name="OT1 Geyser" parent="." node_paths=PackedStringArray("beetle", "dung_ball") instance=ExtResource("6_gl6q3")]
 z_index = -1
 position = Vector2(-4471, 683)
-FORCE_VECTOR = Vector2(-1, 1)
+FORCE_VECTOR = Vector2(-0.45, 0.4)
 beetle = NodePath("../RigidBeetle")
 dung_ball = NodePath("../Dung Ball")
 
@@ -210,15 +209,15 @@ beetle = NodePath("../RigidBeetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Dung" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("11_da55w")]
-position = Vector2(-3916, 456)
+position = Vector2(-3915, 452)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Dung3" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("11_da55w")]
-position = Vector2(1311, 683)
+position = Vector2(1307, 682)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Dung2" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("11_da55w")]
-position = Vector2(-2028, 848)
+position = Vector2(-2025, 823)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="SpaceTheme" type="AudioStreamPlayer" parent="."]
@@ -248,15 +247,16 @@ beetle = NodePath("../RigidBeetle")
 dung_ball = NodePath("../Dung Ball")
 
 [node name="RigidBeetle" parent="." node_paths=PackedStringArray("dung_ball") instance=ExtResource("15_gi385")]
-position = Vector2(-2610, 700)
+position = Vector2(-2609, 737)
 dung_ball = NodePath("../Dung Ball")
 
 [node name="Camera2D" type="Camera2D" parent="RigidBeetle"]
 position = Vector2(98, 48)
 offset = Vector2(0, -20)
+zoom = Vector2(0.605, 0.605)
 
 [node name="Dung Ball" parent="." instance=ExtResource("4_dhshu")]
-position = Vector2(-2517, 692)
+position = Vector2(-2535, 698)
 dung_n = 0
 
 [node name="SpaceArea" type="Area2D" parent="."]
